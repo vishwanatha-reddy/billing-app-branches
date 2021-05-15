@@ -1,0 +1,24 @@
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.basic{
+    border:1px dashed blue;
+    height: 12rem;
+    width:20rem;
+    display:inline-block;
+    margin:2rem;
+     
+    }
+
+.date-label {
+    display: block;
+    font: 1rem 'Fira Sans', sans-serif;
+}
+
+.date-input,
+.date-label {
+    margin: .4rem 0;
+}
