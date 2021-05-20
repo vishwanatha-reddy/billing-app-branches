@@ -5,7 +5,7 @@ export const startBillsList=()=>{
     const token=localStorage.getItem('token');
     return (dispatch)=>{
          
-            axios.get('http://dct-billing-app.herokuapp.com/api/bills',{headers:{"Authorization" : `Bearer ${token}`}} )
+            axios.get('https://dct-billing-app.herokuapp.com/api/bills',{headers:{"Authorization" : `Bearer ${token}`}} )
             .then((res)=>{
                 const result=res.data;
                 //your formData object data will be converted to JSON stringify format automatically by axios
@@ -42,7 +42,7 @@ export const startGenerateBill=(billInfo)=>{
     console.log(billInfo);
     return (dispatch)=>{
          
-            axios.post('http://dct-billing-app.herokuapp.com/api/bills',billInfo,{headers:{"Authorization" : `Bearer ${token}`}} )
+            axios.post('https://dct-billing-app.herokuapp.com/api/bills',billInfo,{headers:{"Authorization" : `Bearer ${token}`}} )
             .then((res)=>{
                 const result=res.data;
                 //your formData object data will be converted to JSON stringify format automatically by axios
@@ -75,7 +75,7 @@ export const asyncBillDelete=(billInfo)=>{
     console.log(billInfo);
     return (dispatch)=>{
          
-            axios.delete(`http://dct-billing-app.herokuapp.com/api/bills/${billInfo._id}`,{headers:{"Authorization" : `Bearer ${token}`}} )
+            axios.delete(`https://dct-billing-app.herokuapp.com/api/bills/${billInfo._id}`,{headers:{"Authorization" : `Bearer ${token}`}} )
             .then((res)=>{
                 const result=res.data;
                 //your formData object data will be converted to JSON stringify format automatically by axios
