@@ -7,6 +7,8 @@ import {setLineItems} from '../../../actions/lineItemsAction';
 import {setClearLineItems} from '../../../actions/lineItemsAction';
 import {startBillsList} from '../../../actions/billAction';
 import  {startGenerateBill} from '../../../actions/billAction';
+import {asyncBillDelete} from '../../../actions/billAction';
+
 
 const Billing = (props) => {
 
@@ -130,8 +132,17 @@ const Billing = (props) => {
         dispatch(setClearLineItems());
     }
 
+    const handleDelete=(bill)=>{
+        dispatch(asyncBillDelete(bill))
+    }
+
+    const handleEdit=(bill)=>{
+        console.log(bill);
+    }
+
     return (
         <div className="container">
+            {/* select customer and date*/}
             <div className="row ">
                 <div className="col-md-10 ">
                     
@@ -155,6 +166,7 @@ const Billing = (props) => {
     
                 </div>
             </div>
+            {/* select products and quantity*/}
             <div className="row">
                 <div className="col-md-10">
                     <form onSubmit={handleProductSubmit} className="border border-dark">
@@ -168,26 +180,29 @@ const Billing = (props) => {
                                 <label className=".date-label" >quantity</label>
                                 <Select  options={quantityOptions}  onChange={handleQuantityChange}/>
                             </div>
-                        <input type="submit" value="Save" className="btn btn-success mx-2"/> 
+                        <input type="submit" value="Add product" className="btn btn-success mx-2"/> 
                         <input type="button" value="gen bill" onClick={()=>{clearStoreItems()}} />
-                        <h1>{cartData.length>0 && cartData.length}</h1>
+                        {/* <h1>{cartData.length>0 && cartData.length}</h1> */}
                     </form>
 
                     <hr />
 
                 </div>
             </div>
+            {/*bills listing*/}
             <div className="row">
                 <div className="col-md-10">
+                    <h3>All Bills</h3>
                     <ol>
                         {
                             billsData.map((bill)=>{
-                                return <li key={bill._id}>{bill.date}-{bill.total}</li>
+                                return <li key={bill._id}>{bill.date}-{bill.total} <button onClick={()=>{handleDelete(bill)}}>delete</button> <button onClick={()=>{handleEdit(bill)}} > View</button></li>
                             })
                         }
                     </ol>
                 </div>
             </div>
+
         </div>
     )
 }

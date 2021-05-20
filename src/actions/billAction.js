@@ -68,3 +68,36 @@ export const setGeneratedBill=(generatedBill)=>{
         payload:generatedBill
     }
 }
+
+//delete a bill
+export const asyncBillDelete=(billInfo)=>{
+    const token=localStorage.getItem('token');
+    console.log(billInfo);
+    return (dispatch)=>{
+         
+            axios.delete(`http://dct-billing-app.herokuapp.com/api/bills/${billInfo._id}`,{headers:{"Authorization" : `Bearer ${token}`}} )
+            .then((res)=>{
+                const result=res.data;
+                //your formData object data will be converted to JSON stringify format automatically by axios
+                if(result.hasOwnProperty('errors')){
+                    console.log(result.message)
+                }else{
+                    // alert('successfully registered');
+                    dispatch(setDeleteBill(result))
+                    console.log(result,'created bill');
+                    // handleLoginRedirect();
+                }
+            })
+            .catch((err)=>{
+                console.log(err);
+            })
+        
+    }
+}
+
+export const setDeleteBill=(deletedBill)=>{
+    return {
+        type:'DELETE_BILL',
+        payload:deletedBill
+    }
+}

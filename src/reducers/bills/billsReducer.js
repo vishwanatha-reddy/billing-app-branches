@@ -7,6 +7,10 @@ const billsReducer=(state=billsInitialState,action)=>{
             return [...action.payload]
         case 'GENERATE_BILL':
             return [...state,action.payload]
+        case 'DELETE_BILL':
+            return state.filter((bill)=>{
+                return bill._id!==action.payload._id
+            })
         
         default:
             return [...state]

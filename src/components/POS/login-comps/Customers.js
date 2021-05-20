@@ -5,6 +5,7 @@ import validator from 'validator';
 import {asyncDeleteCustomer, startCustomerList} from '../../../actions/customersAction'
 import {startCreateCustomer} from '../../../actions/customersAction'
 
+
  const Customers = (props) => {
     const [name, setName]=useState('');
     const [phone,setPhone]=useState('');
@@ -86,6 +87,8 @@ import {startCreateCustomer} from '../../../actions/customersAction'
         dispatch(asyncDeleteCustomer(item._id));
     }
 
+    
+
 
 
     return (
@@ -125,16 +128,20 @@ import {startCreateCustomer} from '../../../actions/customersAction'
 
                     <h1>Existing Customers</h1>
                    { customersData.length>0 ?(
-                        <ol>
+                        <div>
+                            <ol>
                         {
                             customersData.map((item)=>{
                                 return <li key={item._id}>
                                      {item.name} - {item.email} 
                                 <button className="mx-2"  onClick={()=>{handleDelete(item)}}>delete</button>
-                                <button className="mx-2"  onClick={()=>{handleDelete(item)}}>Edit</button></li>
+                                <button className="mx-2"  >Edit</button></li>
                             })
                         }
                     </ol>
+                    
+                        </div>
+                    
                         ):(
                             <h2>No Customers found</h2>
                         )

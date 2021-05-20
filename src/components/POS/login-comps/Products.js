@@ -6,6 +6,7 @@ import {startCreateProduct} from '../../../actions/productsAction'
 
 import ProductItem from '../../../edit-form/ProductItem'
 
+
  const Products = (props) => {
     const [name, setName]=useState('');
     const [price,setPrice]=useState('');
@@ -105,7 +106,8 @@ import ProductItem from '../../../edit-form/ProductItem'
 
                     <h1>Existing Products</h1>
                    { productsData.length>0 ?(
-                        <ol>
+                        <div>
+                            <ol>
                         {
                             productsData.map((item)=>{
                                 return  <ProductItem handleDelete={handleDelete} handleSubmit={handleSubmit} item={item} key={item._id}/>
@@ -113,6 +115,8 @@ import ProductItem from '../../../edit-form/ProductItem'
                             })
                         }
                     </ol>
+                    
+                        </div>
                         ):(
                             <h2>No Products found</h2>
                         )
