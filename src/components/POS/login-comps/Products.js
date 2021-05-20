@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import {useDispatch,useSelector} from 'react-redux'
+import MaterialTable from 'material-table'
 
 import {asyncDeleteProduct, startProductsList} from '../../../actions/productsAction'
 import {startCreateProduct} from '../../../actions/productsAction'
@@ -76,6 +77,7 @@ import ProductItem from '../../../edit-form/ProductItem'
         dispatch(asyncDeleteProduct(item._id));
     }
 
+
     return (
         <div className="container">
             <div className="row ">
@@ -107,14 +109,34 @@ import ProductItem from '../../../edit-form/ProductItem'
                     <h1>Existing Products</h1>
                    { productsData.length>0 ?(
                         <div>
-                            <ol>
+                            {/* <ol>
                         {
                             productsData.map((item)=>{
                                 return  <ProductItem handleDelete={handleDelete} handleSubmit={handleSubmit} item={item} key={item._id}/>
      
                             })
                         }
-                    </ol>
+                    </ol> */}
+                        <div >
+                            <table className="table table-success table-striped table-hover" >
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Product Name</th>
+                                        <th scope="col">Product Price</th>
+                                        <th scope="col">Delete Product</th>
+                                        <th scope="col">Edit product</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {
+                                        productsData.map((item)=>{
+                                            return <ProductItem handleDelete={handleDelete} handleSubmit={handleSubmit} item={item} key={item._id}/>
+                                        })
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    
                     
                         </div>
                         ):(

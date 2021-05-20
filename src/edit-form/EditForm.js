@@ -58,9 +58,9 @@ const EditForm = (props) => {
     }
 
     return (
-        <div>
+        <div >
             <h3>Edit product details</h3>
-            <form onSubmit={handleSubmit} className="border border-dark">
+            <form onSubmit={handleSubmit} className="border border-dark" >
                 <div className="mb-3 mx-2 my-4 d-inline-block" >
                                 <input type="text" className="form-control ml-3 " style={{width:'100%',border:nameValidate?'1px solid red':''}} 
                                 name="name" 
@@ -77,6 +77,7 @@ const EditForm = (props) => {
                                 {/* {priceValidate && <div  className="form-text" style={{color:'red'}}>price should be a positive value</div>} */}
                             </div>
                             <input type="submit" value="Save"  className="btn btn-success mx-2"/> 
+                             <button onClick={handleToggle} className="btn border border-dark mx-2 btn-dark ">cancel</button>
                             {/* <button type="button" onClick={()=>{handleToggle()}} className="btn btn-success mx-2">save</button> */}
             </form>
         </div>
