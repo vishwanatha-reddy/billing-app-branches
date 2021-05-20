@@ -7,7 +7,7 @@ export const startCustomerList=()=>{
     const token=localStorage.getItem('token');
     return (dispatch)=>{
          
-            axios.get('http://dct-billing-app.herokuapp.com/api/customers',{headers:{"Authorization" : `Bearer ${token}`}} )
+            axios.get('https://dct-billing-app.herokuapp.com/api/customers',{headers:{"Authorization" : `Bearer ${token}`}} )
             .then((res)=>{
                 const result=res.data;
                 //your formData object data will be converted to JSON stringify format automatically by axios
@@ -41,7 +41,7 @@ export const startCreateCustomer=(customerInfo)=>{
     const token=localStorage.getItem('token');
     return (dispatch)=>{
          
-            axios.post('http://dct-billing-app.herokuapp.com/api/customers',customerInfo,{headers:{"Authorization" : `Bearer ${token}`}} )
+            axios.post('https://dct-billing-app.herokuapp.com/api/customers',customerInfo,{headers:{"Authorization" : `Bearer ${token}`}} )
             .then((res)=>{
                 const result=res.data;
                 //your formData object data will be converted to JSON stringify format automatically by axios
@@ -74,7 +74,7 @@ export const setCreateCustomer=(createdCustomer)=>{
 //     const token=localStorage.getItem('token');
 //     return (dispatch)=>{
 //          useEffect(()=>{
-//             axios.post(`http://dct-billing-app.herokuapp.com/api/customers/${id}`,{headers:{"Authorization" : `Bearer ${token}`}} )
+//             axios.post(`https://dct-billing-app.herokuapp.com/api/customers/${id}`,{headers:{"Authorization" : `Bearer ${token}`}} )
 //             .then((res)=>{
 //                 const result=res.data;
 //                 //your formData object data will be converted to JSON stringify format automatically by axios
@@ -100,7 +100,7 @@ export const setCreateCustomer=(createdCustomer)=>{
 //     const token=localStorage.getItem('token');
 //     return (dispatch)=>{
 //          useEffect(()=>{
-//             axios.put('http://dct-billing-app.herokuapp.com/api/customers',{headers:{"Authorization" : `Bearer ${token}`}} )
+//             axios.put('https://dct-billing-app.herokuapp.com/api/customers',{headers:{"Authorization" : `Bearer ${token}`}} )
 //             .then((res)=>{
 //                 const result=res.data;
 //                 //your formData object data will be converted to JSON stringify format automatically by axios
@@ -126,7 +126,7 @@ export const asyncDeleteCustomer=(id)=>{
     const token=localStorage.getItem('token');
     return (dispatch)=>{
          
-            axios.delete(`http://dct-billing-app.herokuapp.com/api/customers/${id}`,{headers:{"Authorization" : `Bearer ${token}`}} )
+            axios.delete(`https://dct-billing-app.herokuapp.com/api/customers/${id}`,{headers:{"Authorization" : `Bearer ${token}`}} )
             .then((res)=>{
                 const result=res.data;
                 //your formData object data will be converted to JSON stringify format automatically by axios

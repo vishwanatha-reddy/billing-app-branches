@@ -5,7 +5,7 @@
 export const asyncUserInfo=()=>{
     const token=localStorage.getItem('token');
     return (dispatch)=>{
-            axios.get('http://dct-billing-app.herokuapp.com/api/users/account',{headers:{"Authorization" : `Bearer ${token}`}} )
+            axios.get('https://dct-billing-app.herokuapp.com/api/users/account',{headers:{"Authorization" : `Bearer ${token}`}} )
             .then((res)=>{
                 const result=res.data;
                 //your formData object data will be converted to JSON stringify format automatically by axios
