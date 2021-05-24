@@ -5,7 +5,7 @@ export const startBillsList=()=>{
     const token=localStorage.getItem('token');
     return (dispatch)=>{
          
-            axios.get('https://dct-billing-app.herokuapp.com/api/bills',{headers:{"Authorization" : `Bearer ${token}`}} )
+            axios.get('http://dct-billing-app.herokuapp.com/api/bills',{headers:{"Authorization" : `Bearer ${token}`}} )
             .then((res)=>{
                 const result=res.data;
                 //your formData object data will be converted to JSON stringify format automatically by axios
@@ -42,7 +42,7 @@ export const startGenerateBill=(billInfo)=>{
     console.log(billInfo);
     return (dispatch)=>{
          
-            axios.post('https://dct-billing-app.herokuapp.com/api/bills',billInfo,{headers:{"Authorization" : `Bearer ${token}`}} )
+            axios.post('http://dct-billing-app.herokuapp.com/api/bills',billInfo,{headers:{"Authorization" : `Bearer ${token}`}} )
             .then((res)=>{
                 const result=res.data;
                 //your formData object data will be converted to JSON stringify format automatically by axios
@@ -70,12 +70,11 @@ export const setGeneratedBill=(generatedBill)=>{
 }
 
 //delete a bill
-export const asyncBillDelete=(billInfo)=>{
+export const asyncBillDelete=(id)=>{
     const token=localStorage.getItem('token');
-    console.log(billInfo);
     return (dispatch)=>{
          
-            axios.delete(`https://dct-billing-app.herokuapp.com/api/bills/${billInfo._id}`,{headers:{"Authorization" : `Bearer ${token}`}} )
+            axios.delete(`http://dct-billing-app.herokuapp.com/api/bills/${id}`,{headers:{"Authorization" : `Bearer ${token}`}} )
             .then((res)=>{
                 const result=res.data;
                 //your formData object data will be converted to JSON stringify format automatically by axios
@@ -84,7 +83,7 @@ export const asyncBillDelete=(billInfo)=>{
                 }else{
                     // alert('successfully registered');
                     dispatch(setDeleteBill(result))
-                    console.log(result,'created bill');
+                    console.log(result,'deleted bill');
                     // handleLoginRedirect();
                 }
             })

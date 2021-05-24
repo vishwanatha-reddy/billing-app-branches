@@ -4,7 +4,7 @@ import validator from 'validator';
 
 import {asyncDeleteCustomer, startCustomerList} from '../../../actions/customersAction'
 import {startCreateCustomer} from '../../../actions/customersAction'
-
+import CustomerItem from '../../../edit-form/CustomerItem';
 
  const Customers = (props) => {
     const [name, setName]=useState('');
@@ -31,11 +31,17 @@ import {startCreateCustomer} from '../../../actions/customersAction'
 
     const handleChange=(e)=>{
         if(e.target.name==='name'){
-            setName(e.target.value)
+            const result=e.target.value;
+            if(result.length<14){
+                setName(result);
+            }  
         }else if(e.target.name==='email'){
             setEmail(e.target.value)
         }else if(e.target.name==='phonenumber'){
-            setPhone(e.target.value)
+            const result=e.target.value;
+            if(result.length<11){
+                setPhone(result);
+            }  
         }
     }
 
@@ -52,7 +58,7 @@ import {startCreateCustomer} from '../../../actions/customersAction'
          const customerInfo={};
 
         //customerName validation
-        if(name.length>10){
+        if(name.length>6 && name.length<11){
             customerInfo.name=name;
             setNameValidate(false);
         }else{
@@ -60,8 +66,8 @@ import {startCreateCustomer} from '../../../actions/customersAction'
         }
 
          //phone validation
-        if(phone.length>8 && phone.length<128){
-            customerInfo.phone=Number(phone);
+        if(phone.length===10){
+            customerInfo.mobile=Number(phone);
             setPhoneValidate(false);
         }else{
             setPhoneValidate(true);
@@ -76,7 +82,11 @@ import {startCreateCustomer} from '../../../actions/customersAction'
         }
         console.log(customerInfo);
 
-        dispatch(startCreateCustomer(customerInfo));
+        if(customerInfo.hasOwnProperty('name') && customerInfo.hasOwnProperty('mobile') && customerInfo.hasOwnProperty('email') ){
+            dispatch(startCreateCustomer(customerInfo));
+        }
+
+        
 
         clearFields();
 
@@ -86,10 +96,6 @@ import {startCreateCustomer} from '../../../actions/customersAction'
         console.log(item);
         dispatch(asyncDeleteCustomer(item._id));
     }
-
-    
-
-
 
     return (
         <div className="container">
@@ -126,22 +132,28 @@ import {startCreateCustomer} from '../../../actions/customersAction'
 
                     <hr/>
 
+                   
                     <h1>Existing Customers</h1>
                    { customersData.length>0 ?(
-                        <div>
-                            <ol>
-                        {
-                            customersData.map((item)=>{
-                                return <li key={item._id}>
-                                     {item.name} - {item.email} 
-                                <button className="mx-2"  onClick={()=>{handleDelete(item)}}>delete</button>
-                                <button className="mx-2"  >Edit</button></li>
-                            })
-                        }
-                    </ol>
-                    
-                        </div>
-                    
+                       
+                            <table className="table table-success table-striped table-hover" >
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Customer Name</th>
+                                        <th scope="col">Customer Mobile</th>
+                                        <th scope="col">Delete Customer</th>
+                                        <th scope="col">Edit Customer</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {
+                                        customersData.map((customer)=>{
+                                            return <CustomerItem handleDelete={handleDelete} handleSubmit={handleSubmit} customer={customer} key={customer._id}/>
+                                        })
+                                    }
+                                </tbody>
+                            </table>
+                        
                         ):(
                             <h2>No Customers found</h2>
                         )

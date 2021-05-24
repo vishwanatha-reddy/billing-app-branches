@@ -2,19 +2,21 @@ import React,{useState} from 'react'
 import {useDispatch} from 'react-redux'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
-import {startUpdateProduct} from '../actions/productsAction'
+import {startUpdateCustomer} from '../actions/customersAction'
 
-const ProductItem = (props) => {
-    const {item, handleDelete}=props;
+const CustomerItem = (props) => {
+    const {customer, handleDelete}=props;
+
+    console.log(customer);
 
     const dispatch=useDispatch();
 
     /*for modal start */
-    const [name,setName]=useState(item.name?item.name:'');
-    const [price,setPrice]=useState(item.price?item.price:'');
+    const [name,setName]=useState(customer.name?customer.name:'');
+    const [mobile,setMobile]=useState(customer.mobile?customer.mobile:'');
 
     const [nameValidate,setNameValidate]=useState(false);
-    const [priceValidate,setPriceValidate]=useState(false);
+    const [mobileValidate,setMobileValidate]=useState(false);
 
     const [toggle,setToggle]=useState(false);
 
@@ -26,34 +28,41 @@ const ProductItem = (props) => {
      const handleChange=(e)=>{
         if(e.target.name==='name'){
             setName(e.target.value)
-        }else if(e.target.name==='price'){
-            setPrice(e.target.value)
+        }else if(e.target.name==='mobile'){
+            const result=e.target.value;
+            if(result.length<11){
+                setMobile(e.target.value)
+            }
+            
         }
     }
 
         const handleSubmit=(e)=>{
          e.preventDefault();
-         const productInfo={};
+         const customerInfo={};
 
         //product name validation
         if(name.length>=3){
-            productInfo.name=name;
+            customerInfo.name=name;
             setNameValidate(false);
         }else{
             setNameValidate(true);
         }
 
-         //price validation
-        if(Number(price)>0){
-            productInfo.price=Number(price);
-            setPriceValidate(false);
+         //mobile validation
+        if(mobile.length>0 ){
+            customerInfo.mobile=Number(mobile);
+            setMobileValidate(false);
         }else{
-            setPriceValidate(true);
+            setMobileValidate(true);
         }
     
-        console.log(productInfo);
+        console.log(customerInfo);
 
-        dispatch(startUpdateProduct(productInfo,item._id));
+        if(customerInfo.hasOwnProperty('name') && customerInfo.hasOwnProperty('mobile'))
+        {
+            dispatch(startUpdateCustomer(customerInfo,customer._id));
+        }
 
         handleToggle();
     }
@@ -79,11 +88,11 @@ const ProductItem = (props) => {
                                 </div>
 
                                 <div className="mb-3 mx-2 my-4 d-inline-block">
-                                    <input type="text" className="form-control ml-3 " style={{width:'100%',border:priceValidate?'1px solid red':''}} 
-                                     name="price" 
-                                    value={price}
-                                    onChange={handleChange} placeholder="Enter price"/>
-                                {/* {priceValidate && <div  className="form-text" style={{color:'red'}}>price should be a positive value</div>} */}
+                                    <input type="number" className="form-control ml-3 " style={{width:'100%',border:mobileValidate?'1px solid red':''}} 
+                                     name="mobile" 
+                                    value={mobile}
+                                    onChange={handleChange} placeholder="Enter mobile"/>
+                                {/* {mobileValidate && <div  className="form-text" style={{color:'red'}}>mobile should be a positive value</div>} */}
                                 </div>
                             </form>
                         </ModalBody>
@@ -96,9 +105,9 @@ const ProductItem = (props) => {
                 </>
             ):(
                 <>
-                    <td >{item.name}</td>
-                    <td >{item.price}</td> 
-                    <td ><button className="mx-2 btn btn-danger"  onClick={()=>{handleDelete(item)}}>Delete</button></td>
+                    <td >{customer.name}</td>
+                    <td >{customer.mobile}</td> 
+                    <td ><button className="mx-2 btn btn-danger"  onClick={()=>{handleDelete(customer)}}>Delete</button></td>
                     <td ><button className="mx-2 btn btn-warning"  onClick={()=>{handleToggle()}}>Edit</button></td>
                 </>
             )}
@@ -106,4 +115,4 @@ const ProductItem = (props) => {
     )
 }
 
-export default ProductItem
+export default CustomerItem

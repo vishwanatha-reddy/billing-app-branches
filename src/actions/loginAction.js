@@ -18,7 +18,7 @@
 
 export const asyncLoginUser=(formData,handleHomeRedirect)=>{
     return (dispatch)=>{
-        axios.post('https://dct-billing-app.herokuapp.com/api/users/login',formData)
+        axios.post('http://dct-billing-app.herokuapp.com/api/users/login',formData)
             .then((res)=>{
                 const result=res.data;
                 if(result.hasOwnProperty('errors')){

@@ -1,8 +1,6 @@
 import {createStore, combineReducers,applyMiddleware} from 'redux'
 import thunk from 'redux-thunk'
 
-
-
 import userInfoReducer from '../reducers/userInfo/userInfoReducer'
 import customersReducer from '../reducers/customers/customersReducer'
 import productsReducer from '../reducers/products/productsReducer'
