@@ -80,7 +80,7 @@ const BillItem = (props) => {
                             {/*react html 2 pdf end*/} 
                         </ModalBody>
                      <ModalFooter>
-                       <button className="btn btn-success" onClick={()=>print(`${findCustomer(bill.customer)} - ${moment(bill.date).format('YYYY-MM-DD')} invoice`, 'jsx-template')}> print</button>
+                       <button className="btn btn-success" onClick={()=>print(`${findCustomer(bill.customer)} - ${moment(bill.date).format('YYYY-MM-DD')} invoice`, 'jsx-template')}>Download Bill</button>
                         <Button color="secondary" onClick={handleToggle}>Close</Button>
                     </ModalFooter>
                 </Modal>

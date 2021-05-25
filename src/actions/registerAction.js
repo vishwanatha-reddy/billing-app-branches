@@ -4,7 +4,7 @@
 
 export const asyncRegisterUser=(formData,handleLoginRedirect)=>{
     return (dispatch)=>{
-         axios.post('http://dct-billing-app.herokuapp.com/api/users/register',formData)
+         axios.post('https://dct-billing-app.herokuapp.com/api/users/register',formData)
             .then((res)=>{
                 const result=res.data;
                 //your formData object data will be converted to JSON stringify format automatically by axios
