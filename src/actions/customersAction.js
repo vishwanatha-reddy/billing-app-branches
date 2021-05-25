@@ -1,5 +1,4 @@
- import axios from 'axios'
- import {useEffect} from 'react'
+ import axios from 'axios';
 
 
  //list all customers
@@ -95,31 +94,39 @@ export const setCreateCustomer=(createdCustomer)=>{
 //     }
 // }
 
-// //update a customer
-// export const asyncUpdateCustomer=(formData,handleLoginRedirect)=>{
-//     const token=localStorage.getItem('token');
-//     return (dispatch)=>{
-//          useEffect(()=>{
-//             axios.put('https://dct-billing-app.herokuapp.com/api/customers',{headers:{"Authorization" : `Bearer ${token}`}} )
-//             .then((res)=>{
-//                 const result=res.data;
-//                 //your formData object data will be converted to JSON stringify format automatically by axios
-//                 if(result.hasOwnProperty('errors')){
-//                     console.log(result.message)
-//                 }else{
-//                     // alert('successfully registered');
-//                     dispatch(setUserInfo(result))
-//                     // console.log(result,'user info action');
-//                     // handleLoginRedirect();
+//update a customer
+export const startUpdateCustomer=(customerInfo,id)=>{
+    const token=localStorage.getItem('token');
+    return (dispatch)=>{
+
+            axios.put(`https://dct-billing-app.herokuapp.com/api/customers/${id}`,customerInfo,{headers:{"Authorization" : `Bearer ${token}`}} )
+            .then((res)=>{
+                const result=res.data;
+                //your formData object data will be converted to JSON stringify format automatically by axios
+                if(result.hasOwnProperty('errors')){
+                    console.log(result.message)
+                }else{
+                    // alert('successfully registered');
+                    console.log(result, 'updated customer');
+                    dispatch(setUpdateCustomer(result))
+                    // console.log(result,'user info action');
+                    // handleLoginRedirect();
+                    
                    
-//                 }
-//             })
-//             .catch((err)=>{
-//                 console.log(err);
-//             })
-//          },[])
-//     }
-// }
+                }
+            })
+            .catch((err)=>{
+                console.log(err);
+            })
+    }
+}
+
+export const setUpdateCustomer=(updatedCustomer)=>{
+    return {
+        type:'UPDATE_CUSTOMER',
+        payload:updatedCustomer
+    }
+}
 
 //delete a customer
 export const asyncDeleteCustomer=(id)=>{
@@ -137,7 +144,7 @@ export const asyncDeleteCustomer=(id)=>{
                     // dispatch(setDeleteCustomer(result))
                     // console.log(result,'user info action');
                     // handleLoginRedirect();
-                    dispatch(startCustomerList());
+                    dispatch(setDeleteCustomer(result));
                    
                 }
             })
@@ -148,12 +155,12 @@ export const asyncDeleteCustomer=(id)=>{
     }
 }
 
-// export const setDeleteCustomer=(deletedCustomer)=>{
-//     return {
-//         type:'DELETE_CUSTOMER',
-//         payload:deletedCustomer
-//     }
-// }
+export const setDeleteCustomer=(result)=>{
+    return {
+        type:'DELETE_CUSTOMER',
+        payload:result
+    }
+}
 
 
 

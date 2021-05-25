@@ -1,8 +1,10 @@
 import React,{useEffect,useState} from 'react'
 import {useSelector,useDispatch} from 'react-redux';
 import Select from 'react-select'
+import moment from 'moment';
 
 import '../dashboard-comps/dash-comps.css'
+import BillItem from '../../../edit-form/BillItem'
 import {setLineItems} from '../../../actions/lineItemsAction';
 import {setClearLineItems} from '../../../actions/lineItemsAction';
 import {startBillsList} from '../../../actions/billAction';
@@ -11,9 +13,6 @@ import {asyncBillDelete} from '../../../actions/billAction';
 
 
 const Billing = (props) => {
-
-    
-
     const [date,setDate]=useState('');
     const [product,setProduct]=useState('');
     const [customer,setCustomer]=useState('');
@@ -64,10 +63,6 @@ const Billing = (props) => {
         }
     });
 
-    console.log(quantityOptions);
-
-    console.log(customersOptions);
-
 
     const handleChange=(e)=>{
         if(e.target.name==='date'){
@@ -117,6 +112,11 @@ const Billing = (props) => {
 
         console.log(billData,'from prod submit');
     }
+
+    //handle bill delete
+    const handleDelete=(id)=>{
+        dispatch(asyncBillDelete(id))
+    }
     
     const clearStoreItems=()=>{
         billData.date=date;
@@ -132,12 +132,24 @@ const Billing = (props) => {
         dispatch(setClearLineItems());
     }
 
-    const handleDelete=(bill)=>{
-        dispatch(asyncBillDelete(bill))
+    const findCustomer=(id)=>{
+        let customerName='';
+         customersData.forEach((customer)=>{
+             if(customer._id===id){
+                  customerName=customer.name;
+             }
+        })
+        return customerName;
     }
 
-    const handleEdit=(bill)=>{
-        console.log(bill);
+    const findCustEmail=(id)=>{
+        let customerMail='';
+         customersData.forEach((customer)=>{
+             if(customer._id===id){
+                  customerMail=customer.email;
+             }
+        })
+        return customerMail;
     }
 
     return (
@@ -180,7 +192,7 @@ const Billing = (props) => {
                                 <label className=".date-label" >quantity</label>
                                 <Select  options={quantityOptions}  onChange={handleQuantityChange}/>
                             </div>
-                        <input type="submit" value="Add product" className="btn btn-success mx-2"/> 
+                        <input type="submit" value="Add to cart" className="btn btn-success mx-2"/> 
                         <input type="button" value="gen bill" onClick={()=>{clearStoreItems()}} />
                         {/* <h1>{cartData.length>0 && cartData.length}</h1> */}
                     </form>
@@ -189,17 +201,43 @@ const Billing = (props) => {
 
                 </div>
             </div>
+
+            { billData.lineItems.length>0 && <div className="row">
+                <div className="col-md-10">
+                    <h1>cart details</h1>
+                        
+                </div>
+            </div>}
+
+            <hr />
             {/*bills listing*/}
             <div className="row">
                 <div className="col-md-10">
-                    <h3>All Bills</h3>
-                    <ol>
-                        {
-                            billsData.map((bill)=>{
-                                return <li key={bill._id}>{bill.date}-{bill.total} <button onClick={()=>{handleDelete(bill)}}>delete</button> <button onClick={()=>{handleEdit(bill)}} > View</button></li>
-                            })
-                        }
-                    </ol>
+                    { billsData.length>0 ?(
+                       
+                            <table className="table table-success table-striped table-hover" >
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Bill Date</th>
+                                        <th scope="col">Customer Name</th>
+                                        <th scope="col">Bill Total</th>
+                                        <th scope="col">Bill Details</th>
+                                        <th scope="col">Delete Bill</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {
+                                        billsData.map((bill)=>{
+                                            return <BillItem  bill={bill} findCustEmail={findCustEmail} handleDelete={handleDelete} findCustomer={findCustomer} billsData={billsData} productsData={productsData} key={bill._id}/>
+                                        })
+                                    }
+                                </tbody>
+                            </table>
+                        
+                        ):(
+                            <h2>No Products found</h2>
+                        )
+                    }
                 </div>
             </div>
 

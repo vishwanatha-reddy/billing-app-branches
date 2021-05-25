@@ -102,7 +102,6 @@ export const setUpdateProduct=(updatedProduct)=>{
 export const asyncDeleteProduct=(id)=>{
     const token=localStorage.getItem('token');
     return (dispatch)=>{
-         
             axios.delete(`https://dct-billing-app.herokuapp.com/api/products/${id}`,{headers:{"Authorization" : `Bearer ${token}`}} )
             .then((res)=>{
                 const result=res.data;
@@ -110,12 +109,13 @@ export const asyncDeleteProduct=(id)=>{
                 if(result.hasOwnProperty('errors')){
                     console.log(result.message)
                 }else{
+                    dispatch(setDeleteProduct(result));
                     // alert('successfully registered');
                     // dispatch(setDeleteCustomer(result))
                     // console.log(result,'user info action');
                     // handleLoginRedirect();
-                    dispatch(startProductsList());
-                   
+                    // dispatch(startProductsList());
+                    
                 }
             })
             .catch((err)=>{
@@ -125,9 +125,9 @@ export const asyncDeleteProduct=(id)=>{
     }
 }
 
-// export const setDeleteCustomer=(deletedCustomer)=>{
-//     return {
-//         type:'DELETE_CUSTOMER',
-//         payload:deletedCustomer
-//     }
-// }
+export const setDeleteProduct=(result)=>{
+    return {
+        type:'DELETE_PRODUCT',
+        payload:result
+    }
+}

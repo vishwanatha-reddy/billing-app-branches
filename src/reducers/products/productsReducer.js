@@ -1,7 +1,6 @@
 const productsInitialState=[];
 
 const productsReducer=(state=productsInitialState,action)=>{
-    // console.log(action.payload,'user info from reducer');
     switch(action.type){
         case 'PRODUCTS_LIST':
             return [...action.payload]
@@ -15,7 +14,13 @@ const productsReducer=(state=productsInitialState,action)=>{
                        return {...ele}
                    }
                })}
-
+        case 'DELETE_PRODUCT':{
+            return state.filter((bill)=>{
+                if(bill._id!==action.payload._id){
+                    return {...bill}
+                }
+            })
+        }
                
         default:
             return [...state]

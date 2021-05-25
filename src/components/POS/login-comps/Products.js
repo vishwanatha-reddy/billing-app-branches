@@ -12,12 +12,10 @@ import ProductItem from '../../../edit-form/ProductItem'
     const [name, setName]=useState('');
     const [price,setPrice]=useState('');
 
-    
-
     const [nameValidate,setNameValidate]=useState(false);
     const [priceValidate,setPriceValidate]=useState(false);
 
-      const dispatch=useDispatch();
+    const dispatch=useDispatch();
 
     const productsData=useSelector((store)=>{
         return store.products;
@@ -63,7 +61,6 @@ import ProductItem from '../../../edit-form/ProductItem'
             setPriceValidate(true);
         }
 
-       
         console.log(productInfo);
 
         dispatch(startCreateProduct(productInfo));
@@ -108,16 +105,7 @@ import ProductItem from '../../../edit-form/ProductItem'
 
                     <h1>Existing Products</h1>
                    { productsData.length>0 ?(
-                        <div>
-                            {/* <ol>
-                        {
-                            productsData.map((item)=>{
-                                return  <ProductItem handleDelete={handleDelete} handleSubmit={handleSubmit} item={item} key={item._id}/>
-     
-                            })
-                        }
-                    </ol> */}
-                        <div >
+                       
                             <table className="table table-success table-striped table-hover" >
                                 <thead>
                                     <tr>
@@ -135,10 +123,7 @@ import ProductItem from '../../../edit-form/ProductItem'
                                     }
                                 </tbody>
                             </table>
-                        </div>
-                    
-                    
-                        </div>
+                        
                         ):(
                             <h2>No Products found</h2>
                         )
