@@ -142,6 +142,16 @@ const Billing = (props) => {
         return customerName;
     }
 
+    const findCustEmail=(id)=>{
+        let customerMail='';
+         customersData.forEach((customer)=>{
+             if(customer._id===id){
+                  customerMail=customer.email;
+             }
+        })
+        return customerMail;
+    }
+
     return (
         <div className="container">
             {/* select customer and date*/}
@@ -218,7 +228,7 @@ const Billing = (props) => {
                                 <tbody>
                                     {
                                         billsData.map((bill)=>{
-                                            return <BillItem  bill={bill} handleDelete={handleDelete} findCustomer={findCustomer} key={bill._id}/>
+                                            return <BillItem  bill={bill} findCustEmail={findCustEmail} handleDelete={handleDelete} findCustomer={findCustomer} billsData={billsData} productsData={productsData} key={bill._id}/>
                                         })
                                     }
                                 </tbody>

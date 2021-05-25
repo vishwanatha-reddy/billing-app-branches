@@ -72,9 +72,8 @@ const CustomerItem = (props) => {
    
     return (
         <tr>
-            {toggle?(
-                <>
-                    {/* <EditForm handleSubmit={handleSubmit} handleToggle={handleToggle} item={item}/> */}
+            
+                    
                 <Modal isOpen={toggle}  className="test">
                     <ModalHeader >Edit Product details</ModalHeader>
                         <ModalBody>
@@ -102,15 +101,12 @@ const CustomerItem = (props) => {
                     </ModalFooter>
                 </Modal>
                    
-                </>
-            ):(
-                <>
+            
                     <td >{customer.name}</td>
                     <td >{customer.mobile}</td> 
                     <td ><button className="mx-2 btn btn-danger"  onClick={()=>{handleDelete(customer)}}>Delete</button></td>
                     <td ><button className="mx-2 btn btn-warning"  onClick={()=>{handleToggle()}}>Edit</button></td>
-                </>
-            )}
+             
         </tr>
     )
 }
