@@ -27,7 +27,11 @@ const CustomerItem = (props) => {
 
      const handleChange=(e)=>{
         if(e.target.name==='name'){
-            setName(e.target.value)
+            const result=e.target.value;
+            if(result.length<11){
+                setName(result)
+            }
+            
         }else if(e.target.name==='mobile'){
             const result=e.target.value;
             if(result.length<11){

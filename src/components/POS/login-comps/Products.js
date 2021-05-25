@@ -36,6 +36,7 @@ import ProductItem from '../../../edit-form/ProductItem'
         }
     }
 
+    
     const clearFields=()=>{
         setName('');
         setPrice('');

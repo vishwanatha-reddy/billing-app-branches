@@ -58,7 +58,7 @@ import CustomerItem from '../../../edit-form/CustomerItem';
          const customerInfo={};
 
         //customerName validation
-        if(name.length>6 && name.length<11){
+        if(name.length>0){
             customerInfo.name=name;
             setNameValidate(false);
         }else{
