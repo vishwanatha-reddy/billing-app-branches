@@ -1,6 +1,7 @@
 import React,{useState} from 'react'
 import {useDispatch} from 'react-redux'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import swal from 'sweetalert';
 
 import {startUpdateProduct} from '../actions/productsAction'
 
@@ -56,6 +57,13 @@ const ProductItem = (props) => {
         dispatch(startUpdateProduct(productInfo,item._id));
 
         handleToggle();
+
+        swal({
+            title: "Product info updated!",
+            // text: "You clicked the button!",
+            icon: "success",
+            // button: "Aww yiss!",
+        });
     }
 
     /*for modal end */

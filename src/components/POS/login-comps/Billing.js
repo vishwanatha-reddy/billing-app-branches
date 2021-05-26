@@ -2,11 +2,13 @@ import React,{useEffect,useState} from 'react'
 import {useSelector,useDispatch} from 'react-redux';
 import Select from 'react-select'
 import moment from 'moment';
+import swal from 'sweetalert'
 
 import '../dashboard-comps/dash-comps.css'
 import BillItem from '../../../edit-form/BillItem'
 import {setLineItems} from '../../../actions/lineItemsAction';
 import {setClearLineItems} from '../../../actions/lineItemsAction';
+import {setDeleteLineItem} from '../../../actions/lineItemsAction';
 import {startBillsList} from '../../../actions/billAction';
 import  {startGenerateBill} from '../../../actions/billAction';
 import {asyncBillDelete} from '../../../actions/billAction';
@@ -68,6 +70,7 @@ const Billing = (props) => {
         if(e.target.name==='date'){
             setDate(e.target.value)
         }
+
     }
 
     const handleCustomerChange=(value)=>{
@@ -97,25 +100,41 @@ const Billing = (props) => {
     const handleDateCustomerSubmit=(e)=>{
         e.preventDefault();
 
-        console.log(billData,'from Date Customer submit');
+        // console.log(billData,'from Date Customer submit');
 
         // clearFields();
         
     }
-
-   
 
     const handleProductSubmit=(e)=>{
         e.preventDefault();
 
         dispatch(setLineItems({product,quantity}))
 
-        console.log(billData,'from prod submit');
+        // console.log(billData,'from prod submit');
+        // console.log(cartData,'prods in cart');
     }
 
     //handle bill delete
     const handleDelete=(id)=>{
-        dispatch(asyncBillDelete(id))
+        //sweet alert
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this bill data",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+        if (willDelete) {
+                dispatch(asyncBillDelete(id));
+                swal("Bill has been deleted!", {
+                icon: "success",
+        });
+            } else {
+                swal("Bill was not deleted");
+            }
+        })   
     }
     
     const clearStoreItems=()=>{
@@ -130,6 +149,13 @@ const Billing = (props) => {
         dispatch(startGenerateBill(billData));
 
         dispatch(setClearLineItems());
+
+        swal({
+            title: "Bill generated successfully",
+            // text: "You clicked the button!",
+            icon: "success",
+            // button: "Aww yiss!",
+        });
     }
 
     const findCustomer=(id)=>{
@@ -151,6 +177,45 @@ const Billing = (props) => {
         })
         return customerMail;
     }
+
+    //cart items functions
+
+    //func to return prod name
+    const cartProductName=(prodId)=>{
+        // console.log(prodId);
+        let prodName='';
+         productsData.find((item)=>{
+            if(item._id==prodId){
+                prodName=item.name
+            }
+        });
+    return prodName;
+    }
+
+    //func to return prod price
+    const cartProductPrice=(prodId)=>{
+        // console.log(prodId);
+        let prodPrice='';
+         productsData.find((item)=>{
+            if(item._id==prodId){
+                prodPrice=item.price
+            }
+        });
+    return prodPrice;
+    }
+
+    //func to handle cart delete
+    const handleCartDelete=(prod)=>{
+        console.log(prod,'handle cart del');
+        dispatch(setDeleteLineItem(prod))
+    }
+
+    //func to cal cart total
+    const cartTotal=()=>{
+        let total=0;
+        cartData.forEach()
+    }
+
 
     return (
         <div className="container">
@@ -193,26 +258,52 @@ const Billing = (props) => {
                                 <Select  options={quantityOptions}  onChange={handleQuantityChange}/>
                             </div>
                         <input type="submit" value="Add to cart" className="btn btn-success mx-2"/> 
-                        <input type="button" value="gen bill" onClick={()=>{clearStoreItems()}} />
+                        
                         {/* <h1>{cartData.length>0 && cartData.length}</h1> */}
                     </form>
 
                     <hr />
-
+                    <h4>Cart Items - {cartData.length}</h4>
                 </div>
             </div>
 
-            { billData.lineItems.length>0 && <div className="row">
+            { cartData.length>0 && <div className="row">
                 <div className="col-md-10">
-                    <h1>cart details</h1>
-                        
+                    
+                        <table className="table table-secondary table-striped" >
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Product Name</th>
+                                        <th scope="col"> Price </th>
+                                        <th scope="col"> Quantity</th>
+                                        <th scope="col">Sub Total</th>
+                                        <th scope="col">Remove item</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                   {cartData.map((prod,i)=>{
+                                     return <tr scope="row" key={i}>
+                                              <td>{cartProductName(prod.product)}</td>
+                                              <td>{cartProductPrice(prod.product)}</td>
+                                              <td>{prod.quantity}</td>
+                                              <td>{cartProductPrice(prod.product)*prod.quantity}</td>
+                                              <td><button className="btn btn-danger" 
+                                              onClick={()=>{handleCartDelete(prod)}}>Remove</button></td>
+                                          </tr>
+                                   })}
+                                </tbody>
+                            </table>
+                            {/* <h3>Total - {cartTotal()}</h3> */}
+                            <input type="button" className="btn btn-success" value="Checkout" onClick={()=>{clearStoreItems()}} />
                 </div>
             </div>}
 
-            <hr />
+      
             {/*bills listing*/}
             <div className="row">
+                 
                 <div className="col-md-10">
+                    <hr />
                     { billsData.length>0 ?(
                        
                             <table className="table table-success table-striped table-hover" >
@@ -235,7 +326,7 @@ const Billing = (props) => {
                             </table>
                         
                         ):(
-                            <h2>No Products found</h2>
+                            <h2>No Bills found</h2>
                         )
                     }
                 </div>

@@ -1,6 +1,7 @@
 import React,{useState} from 'react'
 import {useDispatch} from 'react-redux'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import swal from 'sweetalert'
 
 import {startUpdateCustomer} from '../actions/customersAction'
 
@@ -69,6 +70,13 @@ const CustomerItem = (props) => {
         }
 
         handleToggle();
+
+        swal({
+            title: "Customer info updated!",
+            // text: "You clicked the button!",
+            icon: "success",
+            // button: "Aww yiss!",
+        });
     }
 
     /*for modal end */

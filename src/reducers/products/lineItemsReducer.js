@@ -7,6 +7,13 @@ const lineItemsReducer=(state=itemsInitialState,action)=>{
             return [...state,action.payload]
         case 'CLEAR_CART':
             return itemsInitialState
+        case 'DELETE_CARTITEM':{
+            return state.filter(prod=>{
+                if(prod.product!=action.payload.product.toString()){
+                    return {...prod}
+                }
+            })
+        }
         default:
             return [...state]
     }

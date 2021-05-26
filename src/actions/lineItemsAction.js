@@ -10,3 +10,10 @@ export const setLineItems=(item)=>{
          type:'CLEAR_CART'
      }
  }
+
+ export const setDeleteLineItem=(item)=>{
+     return {
+         type:'DELETE_CARTITEM',
+         payload:item
+     }
+ }

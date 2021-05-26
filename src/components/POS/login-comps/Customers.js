@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import {useDispatch,useSelector} from 'react-redux'
 import validator from 'validator';
+import swal from 'sweetalert';
 
 import {asyncDeleteCustomer, startCustomerList} from '../../../actions/customersAction'
 import {startCreateCustomer} from '../../../actions/customersAction'
@@ -85,16 +86,36 @@ import CustomerItem from '../../../edit-form/CustomerItem';
         if(customerInfo.hasOwnProperty('name') && customerInfo.hasOwnProperty('mobile') && customerInfo.hasOwnProperty('email') ){
             dispatch(startCreateCustomer(customerInfo));
         }
-
-        
-
         clearFields();
+
+        swal({
+            title: "Customer added successfully",
+            // text: "You clicked the button!",
+            icon: "success",
+            // button: "Aww yiss!",
+        });
 
     }
 
     const handleDelete=(item)=>{
-        console.log(item);
-        dispatch(asyncDeleteCustomer(item._id));
+        //sweet alert
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this customer data",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+        if (willDelete) {
+                dispatch(asyncDeleteCustomer(item._id));
+                swal("Customer has been deleted!", {
+                icon: "success",
+        });
+            } else {
+                swal("Customer was not deleted");
+            }
+        }) 
     }
 
     return (
