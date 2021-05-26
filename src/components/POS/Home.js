@@ -11,7 +11,16 @@ const Home=(props)=> {
                 </div>
             </div>
             <div className="row ">
-                
+                <div className="col-md-10">
+                    <h3 className="mt-5">Credentials to sign in to application</h3>
+                    <div>
+                        <h4 className="d-inline">Email id</h4> - <h5 className="d-inline">vreddym@gmail.com</h5>
+                    </div>
+                    <div>
+                        <h4 className="d-inline">Password</h4> - <h5 className="d-inline" >vreddym@123</h5>
+                    </div>
+                    <h5 className="mt-3">Please navigate to the Login page, and enter above credentials to explore the application.</h5>
+                </div>
             </div>
         </div>
     )

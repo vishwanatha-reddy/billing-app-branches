@@ -27,7 +27,7 @@ const BillItem = (props) => {
     //find product name
     let prodName='product deleted';
     const findProduct=(id)=>{
-      console.log(id,'prod id');
+      // console.log(id,'prod id');
       productsData.forEach((item)=>{
         if(item._id==id){
           prodName=item.name;
@@ -35,9 +35,9 @@ const BillItem = (props) => {
       })
       return prodName;
     }
-    console.log(prodName);
-    console.log(productsData,'prods data');
-    console.log(bill);
+    // console.log(prodName);
+    // console.log(productsData,'prods data');
+    // console.log(bill);
    
     return (
         <tr >

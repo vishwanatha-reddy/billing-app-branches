@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import {useDispatch,useSelector} from 'react-redux'
-import MaterialTable from 'material-table'
+import swal from 'sweetalert';
 
 import {asyncDeleteProduct, startProductsList} from '../../../actions/productsAction'
 import {startCreateProduct} from '../../../actions/productsAction'
@@ -36,6 +36,7 @@ import ProductItem from '../../../edit-form/ProductItem'
         }
     }
 
+    
     const clearFields=()=>{
         setName('');
         setPrice('');
@@ -67,11 +68,33 @@ import ProductItem from '../../../edit-form/ProductItem'
 
         clearFields();
 
+        swal({
+            title: "Product added successfully",
+            // text: "You clicked the button!",
+            icon: "success",
+            // button: "Aww yiss!",
+        });
     }
 
     const handleDelete=(item)=>{
-        console.log(item);
-        dispatch(asyncDeleteProduct(item._id));
+        //sweet alert
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this product data",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+        if (willDelete) {
+                dispatch(asyncDeleteProduct(item._id));
+                swal("Product has been deleted!", {
+                icon: "success",
+        });
+            } else {
+                swal("Product was not deleted");
+            }
+        })   
     }
 
 
