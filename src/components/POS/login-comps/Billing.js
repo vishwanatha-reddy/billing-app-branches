@@ -347,7 +347,6 @@ const Billing = (props) => {
                     <h4>Cart Items - {cartData.length}</h4>
                 </div>
             </div>
-
             {/* cart item*/} 
             { cartData.length>0 && <>
                 <div className="row">
