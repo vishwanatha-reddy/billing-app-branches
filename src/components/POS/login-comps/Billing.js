@@ -12,6 +12,8 @@ import {setDeleteLineItem} from '../../../actions/lineItemsAction';
 import {startBillsList} from '../../../actions/billAction';
 import  {startGenerateBill} from '../../../actions/billAction';
 import {asyncBillDelete} from '../../../actions/billAction';
+import {startProductsList} from '../../../actions/productsAction';
+import {startCustomerList} from '../../../actions/customersAction';
 
 
 const Billing = (props) => {
@@ -23,9 +25,11 @@ const Billing = (props) => {
 
     const dispatch=useDispatch();   
     
-    useEffect(()=>{
-        dispatch(startBillsList())
-    },[])
+     useEffect(()=>{
+        dispatch(startCustomerList());
+        dispatch(startProductsList());
+        dispatch(startBillsList());
+    },[]);
 
     const productsData=useSelector((store)=>{
         return store.products
@@ -150,6 +154,11 @@ const Billing = (props) => {
 
         dispatch(setClearLineItems());
 
+        //settingtotal bill value in local storage to zero after checkout
+        const zeroBill=0;
+
+        localStorage.setItem('bill total', zeroBill);
+
         swal({
             title: "Bill generated successfully",
             // text: "You clicked the button!",
@@ -206,15 +215,87 @@ const Billing = (props) => {
 
     //func to handle cart delete
     const handleCartDelete=(prod)=>{
-        console.log(prod,'handle cart del');
-        dispatch(setDeleteLineItem(prod))
+        // console.log(prod,'handle cart del');
+        
+        //sweet alert
+        swal({
+            title: "Are you sure?",
+            text: "you want to remove the product from cart ",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+        if (willDelete) {
+                dispatch(setDeleteLineItem(prod))
+                swal("Product has been removed!", {
+                icon: "success",
+        });
+            } else {
+                swal("Product was not removed");
+            }
+        })   
     }
 
-    //func to cal cart total
+
+    //func cart total
     const cartTotal=()=>{
-        let total=0;
-        cartData.forEach()
+        const billTotal=localStorage.getItem('bill total');
+        return billTotal;
     }
+
+    //func prod sub total
+    let count=0;
+    const prodSubtotal=(value)=>{
+        
+        count+=value;
+        // console.log(count);
+        // cartTotal(value);
+        localStorage.setItem('bill total',count)
+        return value;
+    }
+
+    //other way to get bill total, appy below to cartData and productsData arrays. 
+// const obj1=[
+//     {
+//         prod:2,
+//         quantity:2
+//     },
+//     {
+//         prod:3,
+//         quantity:3
+//     }
+// ];
+
+// const obj2=[
+//     {
+//         _id:6,
+//         price:200
+//     },
+//     {
+//         _id:7,
+//         price:300
+//     },
+//     {
+//         _id:2,
+//         price:400
+//     },
+//     {
+//         _id:3,
+//         price:500
+//     },
+// ]
+
+
+//     let total=0;
+//     for(let i=0;i<=obj1.length-1;i++){
+//     for(let j=0;j<=obj2.length-1;j++){
+//         if(obj1[i].prod==obj2[j]._id){
+//             total+=obj1[i].quantity*obj2[j].price;
+//         }
+//     }
+// }
+    
 
 
     return (
@@ -226,7 +307,7 @@ const Billing = (props) => {
                     <form onSubmit={handleDateCustomerSubmit} className="border border-dark">
                         <h3>Add customer details</h3>
                             <div className="mb-3 mx-2 my-4 d-inline-block" >
-                                <label className=".date-label d-block">Date</label>
+                                <label className=".date-label d-block fw-bold">Date</label>
                                 <input type="date"  name="date" 
                                     value={date}
                                     className=".date-input"
@@ -234,7 +315,7 @@ const Billing = (props) => {
                                      onChange={handleChange}></input>
                             </div>
                              <div className="mb-3 mx-2 my-4 d-inline-block" style={{width:'20%'}}>
-                                <label className=".date-label" >customer</label>
+                                <label className=".date-label fw-bold" >Customer</label>
                                 <Select  options={customersOptions} onChange={handleCustomerChange}/>
                             </div>
                     </form>
@@ -249,15 +330,15 @@ const Billing = (props) => {
                     <form onSubmit={handleProductSubmit} className="border border-dark">
                         <h3>Add product details</h3>
                             <div className="mb-3 mx-2 my-4 d-inline-block" style={{width:'20%'}}>
-                                <label className=".date-label" >products</label>
+                                <label className=".date-label fw-bold" >Products</label>
                                 <Select  options={productsOptions} onChange={handleProductChange}/>
                             </div>
 
                             <div className="mb-3 mx-2 my-4 d-inline-block" style={{width:'10%'}}>
-                                <label className=".date-label" >quantity</label>
+                                <label className=".date-label fw-bold" >Quantity</label>
                                 <Select  options={quantityOptions}  onChange={handleQuantityChange}/>
                             </div>
-                        <input type="submit" value="Add to cart" className="btn btn-success mx-2"/> 
+                        <input type="submit" value={`Add to cart (${cartData.length})`} className="btn btn-success mx-2"/> 
                         
                         {/* <h1>{cartData.length>0 && cartData.length}</h1> */}
                     </form>
@@ -267,8 +348,10 @@ const Billing = (props) => {
                 </div>
             </div>
 
-            { cartData.length>0 && <div className="row">
-                <div className="col-md-10">
+            {/* cart item*/} 
+            { cartData.length>0 && <>
+                <div className="row">
+                <div className="col-md-10 ">
                     
                         <table className="table table-secondary table-striped" >
                                 <thead>
@@ -286,17 +369,23 @@ const Billing = (props) => {
                                               <td>{cartProductName(prod.product)}</td>
                                               <td>{cartProductPrice(prod.product)}</td>
                                               <td>{prod.quantity}</td>
-                                              <td>{cartProductPrice(prod.product)*prod.quantity}</td>
+                                              <td>{prodSubtotal(cartProductPrice(prod.product)*prod.quantity)}</td>
                                               <td><button className="btn btn-danger" 
                                               onClick={()=>{handleCartDelete(prod)}}>Remove</button></td>
                                           </tr>
                                    })}
                                 </tbody>
                             </table>
-                            {/* <h3>Total - {cartTotal()}</h3> */}
-                            <input type="button" className="btn btn-success" value="Checkout" onClick={()=>{clearStoreItems()}} />
                 </div>
-            </div>}
+            </div>
+            <div className="row">
+                <div className="col-md-10 d-flex align-items-center justify-content-center">
+                <h5 className="card-title">Bill Total - {cartTotal()} </h5>
+                <input type="button" className="btn btn-success mx-5" value="Checkout" onClick={()=>{clearStoreItems()}} />
+                </div>
+            </div>
+            </>
+            }
 
       
             {/*bills listing*/}
