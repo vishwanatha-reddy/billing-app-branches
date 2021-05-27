@@ -6,6 +6,8 @@ import swal from 'sweetalert';
 import {asyncDeleteCustomer, startCustomerList} from '../../../actions/customersAction'
 import {startCreateCustomer} from '../../../actions/customersAction'
 import CustomerItem from '../../../edit-form/CustomerItem';
+import {startProductsList} from '../../../actions/productsAction';
+import {startBillsList} from '../../../actions/billAction';
 
  const Customers = (props) => {
     const [name, setName]=useState('');
@@ -24,9 +26,11 @@ import CustomerItem from '../../../edit-form/CustomerItem';
 
     console.log(customersData);
 
-    useEffect(()=>{
+     useEffect(()=>{
         dispatch(startCustomerList());
-    },[])
+        dispatch(startProductsList());
+        dispatch(startBillsList());
+    },[]);
 
   
 

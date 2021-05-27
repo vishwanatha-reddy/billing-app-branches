@@ -21,18 +21,18 @@ const Profile=(props)=> {
     return (
 <div className="w-100 d-flex align-items-center justify-content-center m-5">
     
-        <div class="card text-center">
-            <div class="card-header">
+        <div className="card text-center">
+            <div className="card-header">
                  User Profile
             </div >
-            <div class="card-body">
-                <h5 class="card-title">Username - {info.username} </h5>
-                <h5 class="card-title">Email - {info.email} </h5>
-                <h5 class="card-title">Business Name - {info.businessName} </h5>
-                <h5 class="card-title">Address - {info.address}</h5> 
+            <div className="card-body">
+                <h5 className="card-title">Username - {info.username} </h5>
+                <h5 className="card-title">Email - {info.email} </h5>
+                <h5 className="card-title">Business Name - {info.businessName} </h5>
+                <h5 className="card-title">Address - {info.address}</h5> 
             </div>
-            <div class="card-footer text-muted">
-            POS - billing app user
+            <div className="card-footer text-muted">
+            POS - billing application
             </div>
         </div>
 </div>
