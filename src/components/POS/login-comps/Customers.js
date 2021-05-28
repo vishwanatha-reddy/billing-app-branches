@@ -152,7 +152,6 @@ import {startBillsList} from '../../../actions/billAction';
                                 {emailValidate && <div  className="form-text" style={{color:'red'}}>Please enter a valid email</div>}
                             </div>
                             <input type="submit" value="Save" className="btn btn-success mx-2"/> 
-                            <input type="button" value="Cancel" className="btn border border-dark mx-2 "/> 
                     </form>
 
                     <hr/>

@@ -121,7 +121,6 @@ import ProductItem from '../../../edit-form/ProductItem'
                             </div>
 
                             <input type="submit" value="Save" className="btn btn-success mx-2"/> 
-                            <input type="button" value="Cancel" className="btn border border-dark mx-2 "/> 
                     </form>
 
                     <hr/>
