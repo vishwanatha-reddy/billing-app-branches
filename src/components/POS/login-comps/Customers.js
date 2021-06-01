@@ -125,9 +125,9 @@ import {startBillsList} from '../../../actions/billAction';
     return (
         <div className="container">
             <div className="row ">
-                <div className="col-md-10 ">
-                    <h2>Add customers</h2>
-                    <form onSubmit={handleSubmit} className="border border-dark">
+                <div className="col-md-10 text-center mt-5 ">
+                    <h2 style={{marginLeft:'6rem'}}>Add customers</h2>
+                    <form onSubmit={handleSubmit} className="border border-dark" style={{marginLeft:'10rem'}}>
                             <div className="mb-3 mx-2 my-4 d-inline-block" >
                                 <input type="text" className="form-control ml-3 " style={{width:'100%',border:nameValidate?'1px solid red':''}} 
                                 name="name" 
@@ -152,16 +152,15 @@ import {startBillsList} from '../../../actions/billAction';
                                 {emailValidate && <div  className="form-text" style={{color:'red'}}>Please enter a valid email</div>}
                             </div>
                             <input type="submit" value="Save" className="btn btn-success mx-2"/> 
-                            <input type="button" value="Cancel" className="btn border border-dark mx-2 "/> 
                     </form>
 
-                    <hr/>
+                    <hr style={{marginLeft:'10rem',width:'48rem'}}/>
 
                    
                     <h1>Existing Customers</h1>
                    { customersData.length>0 ?(
                        
-                            <table className="table table-success table-striped table-hover" >
+                            <table className="table table-success table-striped table-hover" style={{marginLeft:'10rem',width:'48rem'}} >
                                 <thead>
                                     <tr>
                                         <th scope="col">Customer Name</th>

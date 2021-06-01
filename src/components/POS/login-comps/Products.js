@@ -101,19 +101,19 @@ import ProductItem from '../../../edit-form/ProductItem'
     return (
         <div className="container">
             <div className="row ">
-                <div className="col-md-10 ">
+                <div className="col-md-10 text-center mt-5">
                     <h2>Add products</h2>
-                    <form onSubmit={handleSubmit} className="border border-dark">
+                    <form onSubmit={handleSubmit} className="border w-75 border-dark" style={{marginLeft:'10rem'}}>
                             <div className="mb-3 mx-2 my-4 d-inline-block" >
-                                <input type="text" className="form-control ml-3 " style={{width:'100%',border:nameValidate?'1px solid red':''}} 
+                                <input type="text" className="form-control ml-3 " style={{width:'120%',border:nameValidate?'1px solid red':''}} 
                                 name="name" 
                                 value={name}
                                 onChange={handleChange} placeholder="Enter product name"/>
                                 {nameValidate && <div  className="form-text" style={{color:'red'}}>name should be more than 3 characters</div>}
                             </div>
 
-                            <div className="mb-3 mx-2 my-4 d-inline-block">
-                                <input type="text" className="form-control ml-3 " style={{width:'100%',border:priceValidate?'1px solid red':''}} 
+                            <div className="mb-3 mx-2 my-4 d-inline-block" style={{marginLeft:'5rem'}}>
+                                <input type="text" className="form-control ml-3 " style={{width:'70%',marginLeft:'5rem',border:priceValidate?'1px solid red':''}} 
                                 name="price" 
                                 value={price}
                                 onChange={handleChange} placeholder="Enter price"/>
@@ -121,15 +121,14 @@ import ProductItem from '../../../edit-form/ProductItem'
                             </div>
 
                             <input type="submit" value="Save" className="btn btn-success mx-2"/> 
-                            <input type="button" value="Cancel" className="btn border border-dark mx-2 "/> 
                     </form>
 
-                    <hr/>
+                    <hr className="w-75" style={{marginLeft:'10rem'}}/>
 
                     <h1>Existing Products</h1>
                    { productsData.length>0 ?(
                        
-                            <table className="table table-success table-striped table-hover" >
+                            <table className="table table-success table-striped table-hover w-75" style={{marginLeft:'10rem'}} >
                                 <thead>
                                     <tr>
                                         <th scope="col">Product Name</th>

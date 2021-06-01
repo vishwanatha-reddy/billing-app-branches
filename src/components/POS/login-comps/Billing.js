@@ -1,6 +1,7 @@
 import React,{useEffect,useState} from 'react'
 import {useSelector,useDispatch} from 'react-redux';
 import Select from 'react-select'
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import moment from 'moment';
 import swal from 'sweetalert'
 
@@ -14,6 +15,7 @@ import  {startGenerateBill} from '../../../actions/billAction';
 import {asyncBillDelete} from '../../../actions/billAction';
 import {startProductsList} from '../../../actions/productsAction';
 import {startCustomerList} from '../../../actions/customersAction';
+import {startCreateCustomer} from '../../../actions/customersAction'
 
 
 const Billing = (props) => {
@@ -21,7 +23,12 @@ const Billing = (props) => {
     const [product,setProduct]=useState('');
     const [customer,setCustomer]=useState('');
     const [quantity,setQuantity]=useState('');
-    // const [cartItems,setCartItems]=useState([]);
+    const [toggle,setToggle]=useState(false);
+
+    //for new cust add
+    const [custName,setCustName]=useState('');
+    const [mobile,setMobile]=useState('');
+    const [email,setEmail]=useState('');
 
     const dispatch=useDispatch();   
     
@@ -295,15 +302,117 @@ const Billing = (props) => {
 //         }
 //     }
 // }
+
+//func new customer add toggle
+const handleNewCust=()=>{
+     setToggle(!toggle);
+}
+
+//func new cust details change
+const handleCustChange=(e)=>{
+     if(e.target.name==='custName'){
+            const result=e.target.value;
+            if(result.length<11){
+                setCustName(result)
+            }
+            
+        }else if(e.target.name==='mobile'){
+            const result=e.target.value;
+            if(result.length<11){
+                setMobile(e.target.value)
+            }
+            
+        }else if(e.target.name==='email'){
+            const result=e.target.value;
+            if(result.length<20){
+                setEmail(result)
+            }
+        }
+}
+
+//func new cust submit
+const handleCustSubmit=(e)=>{
+    e.preventDefault();
+
+     const customerInfo={};
+
+        //product name validation
+        if(custName.length>=3){
+            customerInfo.name=custName;
+            
+        }
+
+         //mobile validation
+        if(mobile.length>0 ){
+            customerInfo.mobile=Number(mobile);
+            
+        }
+
+         //email validation
+        if(email.length>0 ){
+            customerInfo.email=email;
+            
+        }
     
+        // console.log(customerInfo);
 
+        if(customerInfo.hasOwnProperty('name') && customerInfo.hasOwnProperty('mobile') && customerInfo.hasOwnProperty('email'))
+        {
+            dispatch(startCreateCustomer(customerInfo));
+        }
 
+        handleNewCust();
+
+        swal({
+            title: "New Customer added!!",
+            // text: "You clicked the button!",
+            icon: "success",
+            // button: "Aww yiss!",
+        });
+
+        dispatch(startCustomerList());
+
+}
     return (
         <div className="container">
             {/* select customer and date*/}
             <div className="row ">
                 <div className="col-md-10 ">
-                    
+                    {/*new customer modal*/}
+                    <Modal isOpen={toggle}  className="test w-100">
+                    <ModalHeader >Customer details</ModalHeader>
+                        <ModalBody>
+                             <form className="border border-dark" >
+                                <div className="mb-3 mx-2 my-4 d-inline-block" >
+                                     <input type="text" className="form-control ml-3 " style={{width:'100%'}} 
+                                     name="custName" 
+                                    value={custName}
+                                    onChange={handleCustChange} placeholder="Enter customer name"/>
+                                {/* {nameValidate && <div  className="form-text" style={{color:'red'}}>name should be more than 3 characters</div>} */}
+                                </div>
+
+                                <div className="mb-3 mx-2 my-4 d-inline-block">
+                                    <input type="text" className="form-control ml-3 " style={{width:'100%'}} 
+                                     name="mobile" 
+                                    value={mobile}
+                                    onChange={handleCustChange} placeholder="Enter mobile"/>
+                                {/* {mobileValidate && <div  className="form-text" style={{color:'red'}}>mobile should be a positive value</div>} */}
+                                </div>
+                                <div className=" my-4 d-inline-block" style={{marginLeft:'8rem'}}>
+                                <input type="email" className="form-control mx-auto" style={{width:'100%'}} 
+                                name="email" 
+                                 value={email}
+                                onChange={handleCustChange} placeholder="Enter email"/>
+                                {/* {emailValidate && <div  className="form-text" style={{color:'red'}}>Please enter a valid email</div>} */}
+                            </div>
+                            </form>
+                        </ModalBody>
+                     <ModalFooter>
+                        <Button color="primary" onClick={handleCustSubmit}>Save</Button>{' '}
+                        <Button color="secondary" onClick={handleNewCust}>Cancel</Button>
+                    </ModalFooter>
+                </Modal>
+
                     <form onSubmit={handleDateCustomerSubmit} className="border border-dark">
                         <h3>Add customer details</h3>
                             <div className="mb-3 mx-2 my-4 d-inline-block" >
@@ -318,6 +427,7 @@ const Billing = (props) => {
                                 <label className=".date-label fw-bold" >Customer</label>
                                 <Select  options={customersOptions} onChange={handleCustomerChange}/>
                             </div>
+                            <button className="btn btn-primary" onClick={()=>{handleNewCust()}}>Add New Customer</button>
                     </form>
 
                     <hr/>

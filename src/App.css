@@ -36,3 +36,9 @@
     transform: rotate(360deg);
   }
 }
+
+/*nav bar home register and login*/
+
+.navUl{
+  background-color: #060b26;
+}

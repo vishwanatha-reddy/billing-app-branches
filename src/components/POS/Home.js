@@ -1,18 +1,24 @@
 import React from 'react'
-import image from './pexels.jpg'
+
 
 const Home=(props)=> {
     return (
         <div className="container ">
-            <h1 className="display-1">Billing Application</h1>
+           
             <div className="row">
-                <div className="col-md-10">
-                    <img src={image} style={{width:'70rem',height:'30rem'}} className="img-fluid" alt="Responsive image"></img>
-                </div>
+                <div className="col-md-10 ">
+                    
+            <div className="jumbotron jumbotron-fluid border border-dark m-5 py-5 px-3 rounded bg-success text-white" style={{width:'80%',backgroundColor:'red'}}>
+                    <div className="container ">
+                        <h1 className="display-4">VRM Billing Application</h1>
+                        <p className="lead" style={{marginLeft:'15rem'}}>- Welcome! to Point Of Sales Billing Application.</p>
+                    </div>
+                    </div>
+            </div>
             </div>
             <div className="row ">
                 <div className="col-md-10">
-                    <h3 className="mt-5">Credentials to sign in to application</h3>
+                    <h3 className="mt-5">Credentials to sign into application</h3>
                     <div>
                         <h4 className="d-inline">Email id</h4> - <h5 className="d-inline">vreddym@gmail.com</h5>
                     </div>

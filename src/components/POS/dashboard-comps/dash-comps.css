@@ -16,6 +16,12 @@
 .date-label {
     display: block;
     font: 1rem 'Fira Sans', sans-serif;
+    
+}
+
+.cardPosition{
+    z-index:-1;
+    margin-left:300px;
 }
 
 .date-input,
