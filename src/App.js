@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react';
 
 import NavBar from './components/POS/NavBar';
-import Dashboard from './components/POS/Dashboard';
+import SideBar from './components/POS/SideBar/components/SideBar';
 
 const App=(props)=> {
   const [userLoggedIn,setUserLoggedIn]=useState(false);
@@ -15,10 +15,12 @@ const App=(props)=> {
       handleAuth();
     }
   },[])
+
+  console.log(userLoggedIn);
   return (
     <div >
-      <NavBar userLoggedIn={userLoggedIn} handleAuth={handleAuth}/>
       
+      {userLoggedIn ? <SideBar handleAuth={handleAuth} userLoggedIn={userLoggedIn} />:<NavBar userLoggedIn={userLoggedIn} handleAuth={handleAuth}/>}
     </div>
   );
 }

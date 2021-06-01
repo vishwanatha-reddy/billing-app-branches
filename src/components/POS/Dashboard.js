@@ -33,12 +33,12 @@ const Dashboard=(props)=> {
     return (
         <div className="container">
           <div className="row">
-              <div className="col-md-14">
-                  <TotalSales bills={bills} className="col-lg-3"/>
-                  {/* <MonthlyRevenue bills={bills}className="col-lg-3"/> */}
-                  <CustomersList customers={customers} className="col-lg-3"/>
-                  <ProductsList products={products} className="col-lg-3"/>
-                  <BillsList bills={bills} className="col-lg-3"/>
+              <div className="col-md-10 ">
+                  <TotalSales bills={bills} className="col-md-4"/>
+                  {/* <MonthlyRevenue bills={bills}className="col-md-4"/> */}
+                  <CustomersList customers={customers} className="col-md-4"/>
+                  <ProductsList products={products} className="col-md-4"/>
+                  <BillsList bills={bills} className="col-md-4"/>
               </div>
           </div>
         </div>

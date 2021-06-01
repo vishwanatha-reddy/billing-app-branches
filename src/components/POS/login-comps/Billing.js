@@ -363,8 +363,6 @@ const handleCustSubmit=(e)=>{
 
         handleNewCust();
 
-        
-
         swal({
             title: "New Customer added!!",
             // text: "You clicked the button!",
@@ -373,11 +371,8 @@ const handleCustSubmit=(e)=>{
         });
 
         dispatch(startCustomerList());
-    
+
 }
-    
-
-
     return (
         <div className="container">
             {/* select customer and date*/}

@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link,Route, withRouter,Switch} from 'react-router-dom';
 
+import '../../App.css';
 import Home from './Home';
 import Login from './Login';
 import Register from './Register'; 
@@ -14,67 +15,24 @@ import Profile from './login-comps/Profile'
 const NavBar=(props)=> {
     const {userLoggedIn,handleAuth}=props;
     return (
-        <div>
-            
-
-             <nav className="navbar navbar-expand-lg navbar-light bg-light">
-  <div className="container-fluid">
+        <div >
+             <nav className="navbar navbar-expand-lg navbar-light navUl  ">
+            <div className="container-fluid ">
     
-    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-      <span className="navbar-toggler-icon"></span>
-    </button>
-    <div className="collapse navbar-collapse " id="navbarNavDropdown">
-      <ul className="navbar-nav ml-15">
+    <div className="collapse navbar-collapse nav-ul navUl " id="navbarNavDropdown">
+      <ul className="navbar-nav ml-15 navUl">
         <li className="nav-item">
           {/* <a className="nav-link active" aria-current="page" href="#">Home</a> */}
-          <Link className="nav-link active " to="/">Home</Link>
+          <Link className="nav-link active" style={{color:'#f5f5f5',fontSize:'1.2rem'}} to="/">Home</Link>
         </li>
-        {userLoggedIn?(
-          <>
+        
             <li className="nav-item">
-              <Link className="nav-link active" to="/dashboard">Dashboard</Link>
-            </li>
-
-            <li className="nav-item">
-              <Link className="nav-link active" to="/customers">Customers</Link>
-            </li>
-
-            <li className="nav-item">
-              <Link className="nav-link active" to="/products">Products</Link>
-            </li>
-
-            <li className="nav-item">
-              <Link className="nav-link active" to="/billing">Billing</Link>
-            </li>
-
-            <li className="nav-item">
-              <Link className="nav-link active" to="/profile">Profile</Link>
-            </li>
-
-            <li className="nav-item">
-              <Link className="nav-link active" to="" onClick={()=>{
-                            localStorage.removeItem('token');
-                            alert('successfully logged out');
-                            handleAuth();
-                            props.history.push('/');
-                        }}>Logout</Link>
-            </li>
-        </>
-        ):(
-            <>
-            <li className="nav-item">
-              <Link className="nav-link active" to="/register">Register</Link>
+              <Link className="nav-link active" style={{color:'#f5f5f5',fontSize:'1.2rem'}} to="/register">Register</Link>
             </li>
 
             <li className="nav-item"> 
-              <Link className="nav-link active " to="/login">Login</Link>
+              <Link className="nav-link active " style={{color:'#f5f5f5',fontSize:'1.2rem'}} to="/login">Login</Link>
             </li>
-            </>
-        )
-
-        }
-        
-        
       </ul>
     </div>
   </div>
