@@ -125,7 +125,9 @@ import ProductItem from '../../../edit-form/ProductItem'
 
                     <hr className="w-75" style={{marginLeft:'10rem'}}/>
 
-                    <h1>Existing Products</h1>
+                    <div className="d-flex justify-content-center">
+                        <h3 style={{marginLeft:'2rem'}}>Existing Products</h3 >
+                    </div>
                    { productsData.length>0 ?(
                        
                             <table className="table table-success table-striped table-hover w-75" style={{marginLeft:'10rem'}} >

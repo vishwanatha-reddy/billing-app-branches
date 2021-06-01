@@ -126,7 +126,7 @@ import {startBillsList} from '../../../actions/billAction';
         <div className="container">
             <div className="row ">
                 <div className="col-md-10 text-center mt-5 ">
-                    <h2 style={{marginLeft:'6rem'}}>Add customers</h2>
+                    <h2 style={{marginLeft:'8rem'}}>Add customers</h2>
                     <form onSubmit={handleSubmit} className="border border-dark" style={{marginLeft:'10rem'}}>
                             <div className="mb-3 mx-2 my-4 d-inline-block" >
                                 <input type="text" className="form-control ml-3 " style={{width:'100%',border:nameValidate?'1px solid red':''}} 
@@ -157,7 +157,9 @@ import {startBillsList} from '../../../actions/billAction';
                     <hr style={{marginLeft:'10rem',width:'48rem'}}/>
 
                    
-                    <h1>Existing Customers</h1>
+                    <div className="d-flex justify-content-center">
+                        <h3 style={{marginLeft:'10rem'}}>Existing Customers</h3 >
+                    </div>
                    { customersData.length>0 ?(
                        
                             <table className="table table-success table-striped table-hover" style={{marginLeft:'10rem',width:'48rem'}} >

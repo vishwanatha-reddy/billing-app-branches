@@ -377,7 +377,7 @@ const handleCustSubmit=(e)=>{
         <div className="container">
             {/* select customer and date*/}
             <div className="row ">
-                <div className="col-md-10 ">
+                <div className="col-md-10 text-center mt-2 ">
                     {/*new customer modal*/}
                     <Modal isOpen={toggle}  className="test w-100">
                     <ModalHeader >Customer details</ModalHeader>
@@ -412,10 +412,11 @@ const handleCustSubmit=(e)=>{
                         <Button color="secondary" onClick={handleNewCust}>Cancel</Button>
                     </ModalFooter>
                 </Modal>
+        {/* end of modal*/}
 
-                    <form onSubmit={handleDateCustomerSubmit} className="border border-dark">
-                        <h3>Add customer details</h3>
-                            <div className="mb-3 mx-2 my-4 d-inline-block" >
+                    <h3 style={{marginLeft:'6rem'}}>Select customer </h3>
+                    <form onSubmit={handleDateCustomerSubmit} className="border border-dark" style={{marginLeft:'10rem',width:'48rem'}}>
+                            <div className="mb-5 mx-2 my-4 d-inline-block" >
                                 <label className=".date-label d-block fw-bold">Date</label>
                                 <input type="date"  name="date" 
                                     value={date}
@@ -423,46 +424,48 @@ const handleCustSubmit=(e)=>{
                                     min="2018-01-01" max="2050-12-31"
                                      onChange={handleChange}></input>
                             </div>
-                             <div className="mb-3 mx-2 my-4 d-inline-block" style={{width:'20%'}}>
+                             <div className="mb-3 mx-2 my-4 d-inline-block" style={{width:'30%'}}>
                                 <label className=".date-label fw-bold" >Customer</label>
                                 <Select  options={customersOptions} onChange={handleCustomerChange}/>
                             </div>
-                            <button className="btn btn-primary" onClick={()=>{handleNewCust()}}>Add New Customer</button>
+                            <button className="btn btn-primary mb-2" onClick={()=>{handleNewCust()}}>Add New Customer</button>
                     </form>
 
-                    <hr/>
+                    <hr style={{marginLeft:'10rem',width:'48rem'}}/>
     
                 </div>
             </div>
             {/* select products and quantity*/}
             <div className="row">
-                <div className="col-md-10">
-                    <form onSubmit={handleProductSubmit} className="border border-dark">
-                        <h3>Add product details</h3>
-                            <div className="mb-3 mx-2 my-4 d-inline-block" style={{width:'20%'}}>
+                <div className="col-md-10 text-center mt-2">
+                    <h3 style={{marginLeft:'6rem'}}>Select products</h3>
+                    <form onSubmit={handleProductSubmit} className="border border-dark" style={{marginLeft:'10rem',width:'48rem'}}>
+                            <div className="mb-5 mx-2 my-4 d-inline-block" style={{width:'30%'}}>
                                 <label className=".date-label fw-bold" >Products</label>
                                 <Select  options={productsOptions} onChange={handleProductChange}/>
                             </div>
 
-                            <div className="mb-3 mx-2 my-4 d-inline-block" style={{width:'10%'}}>
+                            <div className="mb-3 mx-2 my-4 d-inline-block" style={{width:'15%'}}>
                                 <label className=".date-label fw-bold" >Quantity</label>
                                 <Select  options={quantityOptions}  onChange={handleQuantityChange}/>
                             </div>
-                        <input type="submit" value={`Add to cart (${cartData.length})`} className="btn btn-success mx-2"/> 
+                        <input type="submit" value={`Add to cart (${cartData.length})`} className="btn btn-success mb-2 mx-2"/> 
                         
                         {/* <h1>{cartData.length>0 && cartData.length}</h1> */}
                     </form>
 
-                    <hr />
-                    <h4>Cart Items - {cartData.length}</h4>
+                    <hr style={{marginLeft:'10rem',width:'48rem'}} />
+                    <div className="col-md-10 " >
+                        <h4  style={{marginLeft:'15rem'}}>Cart Items - {cartData.length}</h4>
+                    </div>
                 </div>
             </div>
             {/* cart item*/} 
             { cartData.length>0 && <>
                 <div className="row">
-                <div className="col-md-10 ">
+                <div className="col-md-10 text-center mt-2">
                     
-                        <table className="table table-secondary table-striped" >
+                        <table className="table table-secondary table-striped" style={{marginLeft:'10rem',width:'48rem'}}>
                                 <thead>
                                     <tr>
                                         <th scope="col">Product Name</th>
@@ -479,7 +482,7 @@ const handleCustSubmit=(e)=>{
                                               <td>{cartProductPrice(prod.product)}</td>
                                               <td>{prod.quantity}</td>
                                               <td>{prodSubtotal(cartProductPrice(prod.product)*prod.quantity)}</td>
-                                              <td><button className="btn btn-danger" 
+                                              <td><button className="btn btn-outline-danger" 
                                               onClick={()=>{handleCartDelete(prod)}}>Remove</button></td>
                                           </tr>
                                    })}
@@ -501,10 +504,10 @@ const handleCustSubmit=(e)=>{
             <div className="row">
                  
                 <div className="col-md-10">
-                    <hr />
+                    <hr style={{marginLeft:'10rem',width:'48rem'}} />
                     { billsData.length>0 ?(
                        
-                            <table className="table table-success table-striped table-hover" >
+                            <table className="table table-success table-striped table-hover" style={{marginLeft:'10rem',width:'48rem'}}>
                                 <thead>
                                     <tr>
                                         <th scope="col">Bill Date</th>
@@ -524,7 +527,9 @@ const handleCustSubmit=(e)=>{
                             </table>
                         
                         ):(
-                            <h2>No Bills found</h2>
+                            <div className="col-md-10">
+                                <h2 style={{marginLeft:'28rem'}} >No Bills found</h2>
+                            </div>
                         )
                     }
                 </div>

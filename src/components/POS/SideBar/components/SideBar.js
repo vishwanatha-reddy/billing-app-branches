@@ -29,7 +29,8 @@ const SideBar=(props)=> {
         <div className='navbar'>
           <Link to='#' className='menu-bars'>
             <FaIcons.FaBars onClick={showSidebar} />
-          </Link>
+          </Link>    
+              <h3 style={{color:'white',marginLeft:'33%'}} >POS - Billing application</h3>
         </div>
         <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
           <ul className='nav-menu-items' onClick={showSidebar}>
@@ -37,6 +38,7 @@ const SideBar=(props)=> {
               <Link to='#' className='menu-bars'>
                 <AiIcons.AiOutlineClose />
               </Link>
+              
             </li>
             {SidebarData.map((item, index) => {
               return (
