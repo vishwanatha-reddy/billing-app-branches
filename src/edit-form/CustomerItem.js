@@ -116,7 +116,7 @@ const CustomerItem = (props) => {
             
                     <td >{customer.name}</td>
                     <td >{customer.mobile}</td> 
-                    <td ><button className="mx-2 btn btn-danger"  onClick={()=>{handleDelete(customer)}}>Delete</button></td>
+                    <td ><button className="mx-2 btn btn-outline-danger"  onClick={()=>{handleDelete(customer)}}>Delete</button></td>
                     <td ><button className="mx-2 btn btn-warning"  onClick={()=>{handleToggle()}}>Edit</button></td>
              
         </tr>

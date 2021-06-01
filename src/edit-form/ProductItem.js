@@ -103,7 +103,7 @@ const ProductItem = (props) => {
             
                     <td >{item.name}</td>
                     <td >{item.price}</td> 
-                    <td ><button className="mx-2 btn btn-danger"  onClick={()=>{handleDelete(item)}}>Delete</button></td>
+                    <td ><button className="mx-2 btn btn-outline-danger"  onClick={()=>{handleDelete(item)}}>Delete</button></td>
                     <td ><button className="mx-2 btn btn-warning"  onClick={()=>{handleToggle()}}>Edit</button></td>
             
         </tr>

@@ -80,7 +80,7 @@ const BillItem = (props) => {
                             {/*react html 2 pdf end*/} 
                         </ModalBody>
                      <ModalFooter>
-                       <button className="btn btn-success" onClick={()=>print(`${findCustomer(bill.customer)} - ${moment(bill.date).format('YYYY-MM-DD')} invoice`, 'jsx-template')}>Download Bill</button>
+                       <button className="btn btn-outline-success" onClick={()=>print(`${findCustomer(bill.customer)} - ${moment(bill.date).format('YYYY-MM-DD')} invoice`, 'jsx-template')}>Download Bill</button>
                         <Button color="secondary" onClick={handleToggle}>Close</Button>
                     </ModalFooter>
                 </Modal>
@@ -89,7 +89,7 @@ const BillItem = (props) => {
                     <td >{findCustomer(bill.customer)}</td> 
                     <td>{bill.total}</td>
                     <td ><button className="mx-2 btn btn-warning"  onClick={()=>{handleToggle()}}>View Bill</button></td>
-                    <td ><button className="mx-2 btn btn-danger"  onClick={()=>{handleDelete(bill._id)}}>Delete Bill</button></td>
+                    <td ><button className="mx-2 btn btn-outline-danger"  onClick={()=>{handleDelete(bill._id)}}>Delete Bill</button></td>
                 </tr>
     )
 }
