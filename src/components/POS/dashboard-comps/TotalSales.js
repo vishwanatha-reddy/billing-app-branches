@@ -10,14 +10,12 @@ const TotalSales=(props)=> {
     bills.forEach((bill)=>salesVolume+=bill.total);
 
     return (
-        <div className="card mt-3 h-50 w-25 d-inline-block text-center cardPosition">
+        <div className="card text-center border border-dark">
             <div className="card-header">
                 Total Sales
             </div>
             <div className="card-body">
-                 <blockquote className="blockquote mb-0">
                      <h3>{salesVolume}</h3> 
-                </blockquote>
             </div>
         </div>
         )

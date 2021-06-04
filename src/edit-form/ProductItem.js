@@ -95,16 +95,16 @@ const ProductItem = (props) => {
                             </form>
                         </ModalBody>
                      <ModalFooter>
-                        <Button color="primary" onClick={handleSubmit}>Save</Button>{' '}
-                        <Button color="secondary" onClick={handleToggle}>Cancel</Button>
+                        <Button className="save-btn border border-dark"  onClick={handleSubmit}>Save</Button>{' '}
+                        <Button color="secondary" className="border border-dark" onClick={handleToggle}>Cancel</Button>
                     </ModalFooter>
                 </Modal>
                    
             
                     <td >{item.name}</td>
                     <td >{item.price}</td> 
-                    <td ><button className="mx-2 btn btn-outline-danger"  onClick={()=>{handleDelete(item)}}>Delete</button></td>
-                    <td ><button className="mx-2 btn btn-warning"  onClick={()=>{handleToggle()}}>Edit</button></td>
+                    <td ><button className="mx-2 btn remove-button border border-dark"  onClick={()=>{handleDelete(item)}}>Delete</button></td>
+                    <td ><button className="mx-2 btn edit-btn border border-dark"  onClick={()=>{handleToggle()}}>Edit</button></td>
             
         </tr>
     )
