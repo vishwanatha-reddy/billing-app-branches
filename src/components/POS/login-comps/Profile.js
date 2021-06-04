@@ -2,6 +2,7 @@ import React,{useEffect} from 'react'
 import {useSelector,useDispatch} from 'react-redux'
 
 import {asyncUserInfo} from '../../../actions/userInfoAction'
+import '../dashboard-comps/dash-comps.css'
 
 const Profile=(props)=> {
 
@@ -19,10 +20,13 @@ const Profile=(props)=> {
 
 
     return (
-<div className="w-100 d-flex align-items-center justify-content-center m-5">
+<section>
+    <div className=" container m-5 ">
     
-        <div className="card text-center">
-            <div className="card-header">
+        <div className="row">
+            <div className="offset-md-4 offset-1 col-8 col-md-6">
+                <div className="card border border-dark shadow-lg text-center cardPosition">
+            <div className="card-header ">
                  User Profile
             </div >
             <div className="card-body">
@@ -35,7 +39,10 @@ const Profile=(props)=> {
             POS - billing application
             </div>
         </div>
+            </div>
+        </div>
 </div>
+</section>
     )
 }
 

@@ -125,11 +125,11 @@ import {startBillsList} from '../../../actions/billAction';
     return (
         <div className="container">
             <div className="row ">
-                <div className="col-md-10 text-center mt-5 ">
-                    <h2 style={{marginLeft:'8rem'}}>Add customers</h2>
-                    <form onSubmit={handleSubmit} className="border border-dark" style={{marginLeft:'10rem'}}>
+                <div className="col-md-10 text-center mt-5 " style={{width:'60rem'}}>
+                    <h2>Add customers</h2>
+                    <form onSubmit={handleSubmit} className="border border-dark shadow-lg p-3 mb-5 bg-white rounded" style={{marginLeft:'10rem'}}>
                             <div className="mb-3 mx-2 my-4 d-inline-block" >
-                                <input type="text" className="form-control ml-3 " style={{width:'100%',border:nameValidate?'1px solid red':''}} 
+                                <input type="text" className="form-control shadow-lg ml-3 border border-dark " style={{width:'100%',border:nameValidate?'1px solid red':''}} 
                                 name="name" 
                                 value={name}
                                 onChange={handleChange} placeholder="Enter customer name"/>
@@ -137,7 +137,7 @@ import {startBillsList} from '../../../actions/billAction';
                             </div>
 
                             <div className="mb-3 mx-2 my-4 d-inline-block">
-                                <input type="text" className="form-control ml-3 " style={{width:'100%',border:phoneValidate?'1px solid red':''}} 
+                                <input type="text" className="form-control shadow-lg ml-3 border border-dark" style={{width:'100%',border:phoneValidate?'1px solid red':''}} 
                                 name="phonenumber" 
                                 value={phone}
                                 onChange={handleChange} placeholder="Enter phone number"/>
@@ -145,13 +145,13 @@ import {startBillsList} from '../../../actions/billAction';
                             </div>
 
                             <div className="mb-3 mx-2 my-4 d-inline-block">
-                                <input type="email" className="form-control mx-auto" style={{width:'100%',border:emailValidate?'1px solid red':''}} 
+                                <input type="email" className="form-control shadow-lg border border-dark mx-auto" style={{width:'100%',border:emailValidate?'1px solid red':''}} 
                                 name="email" 
                                  value={email}
                                 onChange={handleChange} placeholder="Enter email"/>
                                 {emailValidate && <div  className="form-text" style={{color:'red'}}>Please enter a valid email</div>}
                             </div>
-                            <input type="submit" value="Save" className="btn btn-success mx-2"/> 
+                            <input type="submit" value="Save" className="btn save-btn border border-dark shadow-lg mx-2"/> 
                     </form>
 
                     <hr style={{marginLeft:'10rem',width:'48rem'}}/>
@@ -162,7 +162,8 @@ import {startBillsList} from '../../../actions/billAction';
                     </div>
                    { customersData.length>0 ?(
                        
-                            <table className="table table-success table-striped table-hover" style={{marginLeft:'10rem',width:'48rem'}} >
+                            <div style={{width:'48rem'}} >
+                                <table className="table  shadow-lg border border-dark rounded table-striped table-hover" style={{marginLeft:'10rem',backgroundColor:'#7395AE'}} >
                                 <thead>
                                     <tr>
                                         <th scope="col">Customer Name</th>
@@ -179,6 +180,7 @@ import {startBillsList} from '../../../actions/billAction';
                                     }
                                 </tbody>
                             </table>
+                             </div>
                         
                         ):(
                             <h2>No Customers found</h2>

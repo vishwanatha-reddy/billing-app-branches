@@ -10,6 +10,7 @@ import TotalSales from './dashboard-comps/TotalSales'
 import {startCustomerList} from '../../actions/customersAction';
 import {startProductsList} from '../../actions/productsAction';
 import {startBillsList} from '../../actions/billAction';
+import './dashboard-comps/dash-comps.css'
 
 
 const Dashboard=(props)=> {
@@ -31,17 +32,28 @@ const Dashboard=(props)=> {
 
 
     return (
-        <div className="container">
-          <div className="row">
-              <div className="col-md-10 ">
-                  <TotalSales bills={bills} className="col-md-4"/>
-                  {/* <MonthlyRevenue bills={bills}className="col-md-4"/> */}
-                  <CustomersList customers={customers} className="col-md-4"/>
-                  <ProductsList products={products} className="col-md-4"/>
-                  <BillsList bills={bills} className="col-md-4"/>
-              </div>
-          </div>
+        <section>
+            <div className="container py-5">
+                <div className="row">
+                {/* <div className="col-sm-4 col-md-8 col-lg-8 col-xl-8 text-center offset-sm-6 offset-md-4 offset-lg-4 offset-xl-4"> */}
+                  <div className=" offset-md-2 col-md-3 mt-3  cardPosition">
+                      <TotalSales bills={bills} />
+                  </div>
+                  {/* <MonthlyRevenue bills={bills}className="col-md-3"/> */}
+                  <div className=" offset-md-2 col-md-3 mt-3  cardPosition">
+                      <CustomersList customers={customers} />
+                  </div>
+                </div>
+                <div className="row">
+                    <div className=" offset-md-2 col-md-3 mt-3  cardPosition">
+                      <ProductsList products={products} />
+                  </div>
+                  <div className=" offset-md-2 col-md-3 mt-3  cardPosition">
+                      <BillsList bills={bills} />
+                  </div>
+                </div>
         </div>
+        </section>
 
 
     )

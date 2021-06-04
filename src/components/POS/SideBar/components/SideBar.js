@@ -19,7 +19,7 @@ import Login from '../../Login';
 const SideBar=(props)=> {
 
   const {handleAuth,userLoggedIn}=props;
-  const [sidebar, setSidebar] = useState(false);
+  const [sidebar, setSidebar] = useState(true);
 
   const showSidebar = () => setSidebar(!sidebar);
 

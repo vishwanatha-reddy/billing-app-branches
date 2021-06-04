@@ -380,11 +380,11 @@ const handleCustSubmit=(e)=>{
                 <div className="col-md-10 text-center mt-2 ">
                     {/*new customer modal*/}
                     <Modal isOpen={toggle}  className="test w-100">
-                    <ModalHeader >Customer details</ModalHeader>
+                    <ModalHeader className="align-self-center">Customer details</ModalHeader>
                         <ModalBody>
                              <form className="border border-dark" >
                                 <div className="mb-3 mx-2 my-4 d-inline-block" >
-                                     <input type="text" className="form-control ml-3 " style={{width:'100%'}} 
+                                     <input type="text" className="form-control ml-3 border border-dark" style={{width:'100%'}} 
                                      name="custName" 
                                     value={custName}
                                     onChange={handleCustChange} placeholder="Enter customer name"/>
@@ -392,14 +392,14 @@ const handleCustSubmit=(e)=>{
                                 </div>
 
                                 <div className="mb-3 mx-2 my-4 d-inline-block">
-                                    <input type="text" className="form-control ml-3 " style={{width:'100%'}} 
+                                    <input type="text" className="form-control ml-3 border border-dark " style={{width:'100%'}} 
                                      name="mobile" 
                                     value={mobile}
                                     onChange={handleCustChange} placeholder="Enter mobile"/>
                                 {/* {mobileValidate && <div  className="form-text" style={{color:'red'}}>mobile should be a positive value</div>} */}
                                 </div>
                                 <div className=" my-4 d-inline-block" style={{marginLeft:'8rem'}}>
-                                <input type="email" className="form-control mx-auto" style={{width:'100%'}} 
+                                <input type="email" className="form-control mx-auto border border-dark" style={{width:'100%'}} 
                                 name="email" 
                                  value={email}
                                 onChange={handleCustChange} placeholder="Enter email"/>
@@ -408,27 +408,28 @@ const handleCustSubmit=(e)=>{
                             </form>
                         </ModalBody>
                      <ModalFooter>
-                        <Button color="primary" onClick={handleCustSubmit}>Save</Button>{' '}
-                        <Button color="secondary" onClick={handleNewCust}>Cancel</Button>
+                        <Button className="save-btn" onClick={handleCustSubmit}>Save</Button>{' '}
+                        <Button color="secondary" className="border border-dark" onClick={handleNewCust}>Cancel</Button>
                     </ModalFooter>
                 </Modal>
         {/* end of modal*/}
 
                     <h3 style={{marginLeft:'6rem'}}>Select customer </h3>
-                    <form onSubmit={handleDateCustomerSubmit} className="border border-dark" style={{marginLeft:'10rem',width:'48rem'}}>
+                    <form onSubmit={handleDateCustomerSubmit} className="border shadow-lg border-dark bg-white" style={{marginLeft:'10rem',width:'48rem'}}>
                             <div className="mb-5 mx-2 my-4 d-inline-block" >
-                                <label className=".date-label d-block fw-bold">Date</label>
+                                <label className=".date-label d-block fw-bold" >Date</label>
                                 <input type="date"  name="date" 
                                     value={date}
-                                    className=".date-input"
+                                    className=".date-input rounded shadow-lg"
+                                    style={{height:'2.5rem'}}
                                     min="2018-01-01" max="2050-12-31"
                                      onChange={handleChange}></input>
                             </div>
                              <div className="mb-3 mx-2 my-4 d-inline-block" style={{width:'30%'}}>
-                                <label className=".date-label fw-bold" >Customer</label>
-                                <Select  options={customersOptions} onChange={handleCustomerChange}/>
+                                <label className=".date-label fw-bold " >Customer</label>
+                                <Select  className="shadow-lg border border-dark rounded"   options={customersOptions} onChange={handleCustomerChange}/>
                             </div>
-                            <button className="btn btn-primary mb-2" onClick={()=>{handleNewCust()}}>Add New Customer</button>
+                            <button className="btn btn-primary shadow-lg mb-2" onClick={()=>{handleNewCust()}}>Add New Customer</button>
                     </form>
 
                     <hr style={{marginLeft:'10rem',width:'48rem'}}/>
@@ -439,17 +440,17 @@ const handleCustSubmit=(e)=>{
             <div className="row">
                 <div className="col-md-10 text-center mt-2">
                     <h3 style={{marginLeft:'6rem'}}>Select products</h3>
-                    <form onSubmit={handleProductSubmit} className="border border-dark" style={{marginLeft:'10rem',width:'48rem'}}>
-                            <div className="mb-5 mx-2 my-4 d-inline-block" style={{width:'30%'}}>
+                    <form onSubmit={handleProductSubmit} className="border shadow-lg bg-white border-dark" style={{marginLeft:'10rem',width:'48rem'}}>
+                            <div className="mb-5 mx-2 my-4 d-inline-block " style={{width:'30%'}}>
                                 <label className=".date-label fw-bold" >Products</label>
-                                <Select  options={productsOptions} onChange={handleProductChange}/>
+                                <Select  className="shadow-lg border rounded border-dark" options={productsOptions} onChange={handleProductChange}/>
                             </div>
 
-                            <div className="mb-3 mx-2 my-4 d-inline-block" style={{width:'15%'}}>
+                            <div className="mb-3 mx-2 my-4 d-inline-block " style={{width:'15%'}}>
                                 <label className=".date-label fw-bold" >Quantity</label>
-                                <Select  options={quantityOptions}  onChange={handleQuantityChange}/>
+                                <Select  className="shadow-lg border border-dark rounded"  options={quantityOptions}  onChange={handleQuantityChange}/>
                             </div>
-                        <input type="submit" value={`Add to cart (${cartData.length})`} className="btn btn-success mb-2 mx-2"/> 
+                        <input type="submit" value={`Add to cart (${cartData.length})`} className="btn save-btn border border-dark mb-2 shadow-lg mx-2"/> 
                         
                         {/* <h1>{cartData.length>0 && cartData.length}</h1> */}
                     </form>
@@ -463,9 +464,9 @@ const handleCustSubmit=(e)=>{
             {/* cart item*/} 
             { cartData.length>0 && <>
                 <div className="row">
-                <div className="col-md-10 text-center mt-2">
+                <div className="col-md-10 text-center   mt-2">
                     
-                        <table className="table table-secondary table-striped" style={{marginLeft:'10rem',width:'48rem'}}>
+                        <table className="table  shadow-lg table-striped rounded border border-dark " style={{marginLeft:'10rem',width:'48rem',backgroundColor:'#AFD275'}}>
                                 <thead>
                                     <tr>
                                         <th scope="col">Product Name</th>
@@ -482,7 +483,7 @@ const handleCustSubmit=(e)=>{
                                               <td>{cartProductPrice(prod.product)}</td>
                                               <td>{prod.quantity}</td>
                                               <td>{prodSubtotal(cartProductPrice(prod.product)*prod.quantity)}</td>
-                                              <td><button className="btn btn-outline-danger" 
+                                              <td><button className="btn border border-dark remove-button"
                                               onClick={()=>{handleCartDelete(prod)}}>Remove</button></td>
                                           </tr>
                                    })}
@@ -507,7 +508,7 @@ const handleCustSubmit=(e)=>{
                     <hr style={{marginLeft:'10rem',width:'48rem'}} />
                     { billsData.length>0 ?(
                        
-                            <table className="table table-success table-striped table-hover" style={{marginLeft:'10rem',width:'48rem'}}>
+                            <table className="table  table-striped border rounded border-dark shadow-lg" style={{marginLeft:'10rem',width:'48rem',backgroundColor:'#7395AE'}}>
                                 <thead>
                                     <tr>
                                         <th scope="col">Bill Date</th>

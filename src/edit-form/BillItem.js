@@ -88,8 +88,8 @@ const BillItem = (props) => {
                     <td >{moment(bill.date).format('YYYY-MM-DD')}</td>
                     <td >{findCustomer(bill.customer)}</td> 
                     <td>{bill.total}</td>
-                    <td ><button className="mx-2 btn btn-warning"  onClick={()=>{handleToggle()}}>View Bill</button></td>
-                    <td ><button className="mx-2 btn btn-outline-danger"  onClick={()=>{handleDelete(bill._id)}}>Delete Bill</button></td>
+                    <td ><button className="mx-2 btn border border-dark view-bill-btn"  onClick={()=>{handleToggle()}}>View Bill</button></td>
+                    <td ><button className="mx-2 btn remove-button border border-dark"  onClick={()=>{handleDelete(bill._id)}}>Delete Bill</button></td>
                 </tr>
     )
 }
