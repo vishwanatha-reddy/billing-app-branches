@@ -59,4 +59,4 @@ const Dashboard=(props)=> {
     )
 }
 
-export default Dashboard
+export default withRouter(Dashboard)

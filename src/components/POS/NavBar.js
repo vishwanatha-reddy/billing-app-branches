@@ -16,32 +16,31 @@ const NavBar=(props)=> {
     const {userLoggedIn,handleAuth}=props;
     return (
         <div >
-             <nav className="navbar navbar-expand-lg navbar-light navUl  ">
+          <nav className="navbar navbar-expand-lg navbar-light navUl  ">
             <div className="container-fluid ">
-    
-    <div className="collapse navbar-collapse nav-ul navUl " id="navbarNavDropdown">
-      <ul className="navbar-nav ml-15 navUl">
-        <li className="nav-item">
+                <div className="collapse navbar-collapse nav-ul navUl " id="navbarNavDropdown">
+                  <ul className="navbar-nav ml-15 navUl">
+                    <li className="nav-item">
           {/* <a className="nav-link active" aria-current="page" href="#">Home</a> */}
-          <Link className="nav-link active" style={{color:'#f5f5f5',fontSize:'1.2rem'}} to="/">Home</Link>
-        </li>
+                      <Link className="nav-link active" style={{color:'#f5f5f5',fontSize:'1.2rem'}} to="/">Home</Link>
+                    </li>
         
-            <li className="nav-item">
-              <Link className="nav-link active" style={{color:'#f5f5f5',fontSize:'1.2rem'}} to="/register">Register</Link>
-            </li>
+                        <li className="nav-item">
+                          <Link className="nav-link active" style={{color:'#f5f5f5',fontSize:'1.2rem'}} to="/register">Register</Link>
+                        </li>
 
-            <li className="nav-item"> 
-              <Link className="nav-link active " style={{color:'#f5f5f5',fontSize:'1.2rem'}} to="/login">Login</Link>
-            </li>
-      </ul>
-    </div>
-  </div>
-</nav>
+                        <li className="nav-item"> 
+                          <Link className="nav-link active " style={{color:'#f5f5f5',fontSize:'1.2rem'}} to="/login">Login</Link>
+                        </li>
+                  </ul>
+                </div>
+              </div>
+          </nav>
 
               <Switch>
                 {/* before login */}
                 <Route path="/" component={Home} exact={true}/>
-                <Route path="/register" component={Register}/>
+                <Route path="/register" component={Register} exact={true}/>
                 <Route path="/login" render={(props)=>{
                   return <Login
                         {...props}//lec 33, need to pass this prop to get history object n push etc properties
@@ -51,10 +50,10 @@ const NavBar=(props)=> {
 
               {/* after login */}
               <Route path="/billing" component={Billing} exact={true}/>
-              <Route path="/customers" component={Customers}/>
+              <Route path="/customers" component={Customers}  exact={true}/>
               <Route path="/products" component={Products} exact={true}/>
-              <Route path="/profile" component={Profile}/>
-              <Route path="/dashboard" component={Dashboard}/>
+              <Route path="/profile" component={Profile} exact={true}/>
+              <Route path="/dashboard" component={Dashboard} exact={true}/>
 
               <ProtectedRoute path="/dashboard" component={Dashboard} userLoggedIn={userLoggedIn}/>
               <Route path="*" component={()=><h1>404 NOT FOUND</h1>}/>
