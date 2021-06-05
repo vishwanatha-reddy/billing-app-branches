@@ -1,13 +1,14 @@
 import React,{useState,useEffect} from 'react';
 
-import NavBar from './components/POS/NavBar';
 import SideBar from './components/POS/SideBar/components/SideBar';
+import {BrowserRouter as Router, Link,Switch, Route , withRouter, Redirect} from 'react-router-dom'
 
 const App=(props)=> {
   const [userLoggedIn,setUserLoggedIn]=useState(false);
 
   const handleAuth=()=>{
     setUserLoggedIn(!userLoggedIn);
+ 
   }
 
   useEffect(()=>{
@@ -18,10 +19,9 @@ const App=(props)=> {
 
   console.log(userLoggedIn);
   return (
-    <div >
-      
-      {userLoggedIn ? <SideBar handleAuth={handleAuth} userLoggedIn={userLoggedIn} />:<NavBar userLoggedIn={userLoggedIn} handleAuth={handleAuth}/>}
-    </div>
+    <Router >
+       <SideBar handleAuth={handleAuth} userLoggedIn={userLoggedIn} />
+    </Router>
   );
 }
 

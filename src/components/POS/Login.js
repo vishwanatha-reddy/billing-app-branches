@@ -1,10 +1,12 @@
 import React,{useState} from 'react';
-import axios from 'axios';
 import {useSelector,useDispatch} from 'react-redux'
 import { asyncLoginUser } from '../../actions/loginAction';
 import validator from 'validator';
+import Dashboard from './Dashboard';
+import { Link,Switch, Route , withRouter, Redirect} from 'react-router-dom';
 
 const Login=(props)=>{
+    
     const [email,setEmail]=useState('');
     const [password,setPassword]=useState('');
 
@@ -13,9 +15,11 @@ const Login=(props)=>{
     
     const dispatch=useDispatch(); 
 
+
     const handleHomeRedirect=()=>{
         props.history.push('/dashboard');
         props.handleAuth();
+        
     }
 
     const handleSubmit=(e)=>{
@@ -84,8 +88,11 @@ const Login=(props)=>{
                 </div>
           </div>
             </div>
+            <Switch>
+                <Route path='/dashboard' component={Dashboard} exact={true}/>
+            </Switch>
         </div>
     )
 }
 
-export default Login
+export default withRouter(Login)
